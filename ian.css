@@ -5,7 +5,7 @@
 .demo-layout-transparent .mdl-layout__drawer-button {
   position: absolute;
   top: 0;
-  color: black;
+  color: white;
 }
 #cesiumContainer {
   position: absolute;
