@@ -15,6 +15,20 @@
 </head>
 <body>
   <div id="cesiumContainer"></div>
+  <div class="demo-layout-transparent mdl-layout mdl-js-layout">
+    <header class="mdl-layout__header mdl-layout__header--transparent">
+    <div class="mdl-layout__drawer">
+      <span class="mdl-layout-title">UIC</span>
+      <nav class="mdl-navigation">
+        <a class="mdl-navigation__link" href="">Mission planning</a>
+        <a class="mdl-navigation__link" href="">Ongoing OPS</a>
+        <a class="mdl-navigation__link" href="">Estimation Tool</a>
+        <a class="mdl-navigation__link" href="">Intel Tool</a>
+      </nav>
+    </div>
+    <main class="mdl-layout__content">
+    </main>
+  </div>
   <script>
     var viewer = new Cesium.Viewer('cesiumContainer', {
       instructionsInitiallyVisible:false,
