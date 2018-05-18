@@ -3,12 +3,19 @@ console.log("Script starting Cesium");
 Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJjMWI3Y2EzZS0wYWQwLTQzNDEtYWU3ZC0xMDFjODRjODdjMDMiLCJpZCI6MjY5LCJpYXQiOjE1MjI3ODY5NDV9.SaOpK9rwYkTsLFSzl-zBKCj-JOxU7Wo0vxIDnC7CSdo';
 
 var viewer = new Cesium.Viewer('cesiumContainer',{
+  animation : false,
+  creditContainer: "divCredit",
+  homeButton: false,
   instructionsInitiallyVisible : false,
+  infoBox : false,
+  selectionIndicator : false,
   timeline : false,
   terrainProvider : new Cesium.CesiumTerrainProvider({
       url: Cesium.IonResource.fromAssetId(1)
   })
 });
+
+var scene = viewer.scene;
 
 var center = Cesium.Cartesian3.fromDegrees(-82.5, 35.3);
 viewer.camera.lookAt(center, new Cesium.Cartesian3(0.0, 0.0, 20000000.0));
