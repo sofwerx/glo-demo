@@ -16,7 +16,30 @@
     <div class="mdl-layout__drawer">
       <span class="mdl-layout-title">UIC</span>
       <nav class="mdl-navigation">
-        <a class="mdl-navigation__link" href="">Mission planning</a>
+        <a id="mission-planning-link" class="mdl-navigation__link">Mission planning</a>
+        <dialog id="mission-planning-dialog" class="mdl-dialog">
+          <h4 class="mdl-dialog__title">Mission: Afgan Security</h4>
+          <div class="mdl-dialog__content">
+            Timeline
+            <p>
+            <ul class="demo-list-item mdl-list">
+              <li class="mdl-list__item">
+                <span class="mdl-list__item-primary-content">
+                  <a onclick="phase1()" href="">phase 1 - may 15 - may 20</a>
+                </span>
+              </li>
+              <li class="mdl-list__item">
+                <span class="mdl-list__item-primary-content">
+                  <a href="">phase 2 - may21 - may 31</a>
+                </span>
+              </li>
+            </ul>
+            </p>
+	  </div>
+	  <div class="mdl-dialog__actions mdl-dialog__actions--full-width">
+            <button type="button" class="mdl-button close">Back</button>
+          </div>
+        </dialog>
         <a class="mdl-navigation__link" href="">Ongoing OPS</a>
         <a class="mdl-navigation__link" href="">Estimation Tool</a>
         <a class="mdl-navigation__link" href="">Intel Tool</a>
@@ -25,5 +48,22 @@
     <main class="mdl-layout__content">
     </main>
   </div>
+  <script>
+    console.log("Script loading");
+    var missionPlanningDialog = document.querySelector('#mission-planning-dialog');
+    var missionPlanningLink = document.querySelector('#mission-planning-link');
+    if (! missionPlanningDialog.showModal) {
+      console.log("Registering missionPlanningDialog");
+      dialogPolyfill.registerDialog(missionPlanningDialog);
+    }
+    missionPlanningLink.addEventListener('click', function() {
+      console.log("Showing missionPlanningDialog");
+      missionPlanningDialog.showModal();
+    });
+    missionPlanningDialog.querySelector('.close').addEventListener('click', function() {
+      console.log("Closing missionPlanningDialog");
+      missionPlanningDialog.close();
+    }); 
+  </script>
 </body>
 </html>
