@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Use correct character set. -->
+  <meta charset="utf-8">
+  <!-- Tell IE to use the latest, best version. -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!-- Make the application on mobile take up the full browser screen and disable user scaling. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+  <title>GLO</title>
+  <script src="Cesium/Cesium.js"></script>
+  <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+  <link rel="stylesheet" href="ian.css"></link>
+</head>
+<body>
+  <div class="demo-layout-transparent mdl-layout mdl-js-layout">
+    <div class="mdl-layout__drawer">
+      <span class="mdl-layout-title">UIC</span>
+      <nav class="mdl-navigation">
+        <a id="mission-planning-link" class="mdl-navigation__link">Mission planning</a>
+        <dialog id="mission-planning-dialog" class="mdl-dialog">
+          <h4 class="mdl-dialog__title">Mission: Afgan Security</h4>
+          <div class="mdl-dialog__content">
+            <h3>Timeline</h3>
+            <p>
+            <ul class="demo-list-item mdl-list">
+              <li class="mdl-list__item">
+                <span class="mdl-list__item-primary-content">
+                  <a id="phase1-link" class="mdl-navigation__link">Phase 1 (May 15-20)</a>
+                  <dialog id="phase1-dialog" class="mdl-dialog">
+                    <h4 class="mdl-dialog__title">Phase 1</h4>
+                    <div class="mdl-dialog__content">
+                      <ul class="demo-list-item mdl-list">
+                        <li class="mdl-list__item">
+                          <span class="mdl-list__item-primary-content">
+		            Start date: May 15, 2018
+                          </span>
+                        </li>
+                        <li class="mdl-list__item">
+                          <span class="mdl-list__item-primary-content">
+		            End date: May 20, 2018
+                          </span>
+                        </li>
+                        <li class="mdl-list__item">
+                          <span class="mdl-list__item-primary-content">
+		            <a id="phase1-location" class="mdl-navigation__link">Location</a>
+                          </span>
+                        </li>
+                        <li class="mdl-list__item">
+                          <span class="mdl-list__item-primary-content">
+		            <a id="phase1-location" class="mdl-navigation__link">PAX</a>
+                          </span>
+                        </li>
+                        <li class="mdl-list__item">
+                          <span class="mdl-list__item-primary-content">
+		            <a id="phase1-location" class="mdl-navigation__link">Equipment</a>
+                          </span>
+                        </li>
+                        <li class="mdl-list__item">
+                          <span class="mdl-list__item-primary-content">
+		            <a id="phase1-location" class="mdl-navigation__link">Mission Type</a>
+                          </span>
+                        </li>
+                        <li class="mdl-list__item">
+                          <span class="mdl-list__item-primary-content">
+		            <a id="phase1-location" class="mdl-navigation__link">Logistic Requirements</a>
+                          </span>
+                        </li>
+                      </ul>
+                      </p>
+	            </div>
+	            <div class="mdl-dialog__actions mdl-dialog__actions--full-width">
+                      <button type="button" class="mdl-button close">Back</button>
+                    </div>
+                  </dialog>
+                </span>
+              </li>
+              <li class="mdl-list__item">
+                <span class="mdl-list__item-primary-content">
+                  <a id="phase2-link" class="mdl-navigation__link">Phase 2 (May 21-31)</a>
+                </span>
+              </li>
+            </ul>
+            </p>
+	  </div>
+	  <div class="mdl-dialog__actions mdl-dialog__actions--full-width">
+            <button type="button" class="mdl-button close">Back</button>
+          </div>
+        </dialog>
+        <a class="mdl-navigation__link" href="">Ongoing OPS</a>
+        <a class="mdl-navigation__link" href="">Estimation Tool</a>
+        <a class="mdl-navigation__link" href="">Intel Tool</a>
+      </nav>
+    </div>
+    <main class="mdl-layout__content">
+    <div id="cesiumContainer"></div>
+    </main>
+  </div>
+  <script>
+    console.log("Script loading");
+    var missionPlanningDialog = document.querySelector('#mission-planning-dialog');
+    var missionPlanningLink = document.querySelector('#mission-planning-link');
+    if (! missionPlanningDialog.showModal) {
+      console.log("Registering missionPlanningDialog");
+      dialogPolyfill.registerDialog(missionPlanningDialog);
+    }
+    missionPlanningLink.addEventListener('click', function() {
+      console.log("Showing missionPlanningDialog");
+      missionPlanningDialog.showModal();
+    });
+    missionPlanningDialog.querySelector('.close').addEventListener('click', function() {
+      console.log("Closing missionPlanningDialog");
+      missionPlanningDialog.close();
+    }); 
+
+    var phase1Dialog = document.querySelector('#phase1-dialog');
+    var phase1Link = document.querySelector('#phase1-link');
+    if (! phase1Dialog.showModal) {
+      console.log("Registering phase1Dialog");
+      dialogPolyfill.registerDialog(phase1Dialog);
+    }
+    phase1Link.addEventListener('click', function() {
+      console.log("Showing phase1Dialog");
+      phase1Dialog.showModal();
+    });
+    phase1Dialog.querySelector('.close').addEventListener('click', function() {
+      console.log("Closing phase1Dialog");
+      phase1Dialog.close();
+    }); 
+  </script>
+</body>
+</html>
