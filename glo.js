@@ -135,7 +135,7 @@ function planPhaseOne() {
   var mnHdg = phase1Dialog.querySelector('#mission-name-heading');
   mnHdg.innerText = curMissionPlan.name;
   var locField = phase1Dialog.querySelector('#missionLocation');
-  locField.value = curMissionPlan.formatMGRS();
+  locField.innerText = curMissionPlan.formatMGRS();
   phase1Dialog.showModal();
 };
 
