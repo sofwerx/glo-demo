@@ -7,6 +7,13 @@
   top: 0;
   color: white;
 }
+.mdl-dialog {
+  position: relative;
+  left: 60%;
+}
+.mdl-snackbar {
+  background-color: rgb(255,50,50);
+}
 #cesiumContainer {
   position: absolute;
   top: 0;
