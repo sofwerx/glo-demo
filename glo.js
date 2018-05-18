@@ -9,16 +9,23 @@ var viewer = new Cesium.Viewer('cesiumContainer',{
   instructionsInitiallyVisible : false,
   infoBox : false,
   selectionIndicator : false,
-  timeline : false,
-  terrainProvider : new Cesium.CesiumTerrainProvider({
-      url: Cesium.IonResource.fromAssetId(1)
-  })
+  timeline : false
 });
 
 var scene = viewer.scene;
+var handler = new Cesium.ScreenSpaceEventHandler(scene.canvas);
 
-var center = Cesium.Cartesian3.fromDegrees(-82.5, 35.3);
-viewer.camera.lookAt(center, new Cesium.Cartesian3(0.0, 0.0, 20000000.0));
+handler.setInputAction(function(click) {
+  console.log("Left Click detected");
+  var pickedObject = scene.pick(click.position);
+  var position = viewer.camera.pickEllipsoid(click.position);
+  if(Cesium.defined(position)) {
+    var cartographicPosition = Cesium.Ellipsoid.WGS84.cartesianToCartographic(position);
+    var longitude = Cesium.Math.toDegrees(cartographicPosition.longitude);
+    var latitude = Cesium.Math.toDegrees(cartographicPosition.latitude);
+    console.log("Left clicked at latitude " + latitude + ", longitude " + longitude);
+  }
+}, Cesium.ScreenSpaceEventType.LEFT_CLICK);
 
 console.log("Cesium Initialized");
 
