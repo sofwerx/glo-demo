@@ -26,6 +26,52 @@
               <li class="mdl-list__item">
                 <span class="mdl-list__item-primary-content">
                   <a id="phase1-link" class="mdl-navigation__link">Phase 1 (May 15-20)</a>
+                  <dialog id="phase1-dialog" class="mdl-dialog">
+                    <h4 class="mdl-dialog__title">Phase 1</h4>
+                    <div class="mdl-dialog__content">
+                      <ul class="demo-list-item mdl-list">
+                        <li class="mdl-list__item">
+                          <span class="mdl-list__item-primary-content">
+		            Start date: May 15, 2018
+                          </span>
+                        </li>
+                        <li class="mdl-list__item">
+                          <span class="mdl-list__item-primary-content">
+		            End date: May 20, 2018
+                          </span>
+                        </li>
+                        <li class="mdl-list__item">
+                          <span class="mdl-list__item-primary-content">
+		            <a id="phase1-location" class="mdl-navigation__link">Location</a>
+                          </span>
+                        </li>
+                        <li class="mdl-list__item">
+                          <span class="mdl-list__item-primary-content">
+		            <a id="phase1-location" class="mdl-navigation__link">PAX</a>
+                          </span>
+                        </li>
+                        <li class="mdl-list__item">
+                          <span class="mdl-list__item-primary-content">
+		            <a id="phase1-location" class="mdl-navigation__link">Equipment</a>
+                          </span>
+                        </li>
+                        <li class="mdl-list__item">
+                          <span class="mdl-list__item-primary-content">
+		            <a id="phase1-location" class="mdl-navigation__link">Mission Type</a>
+                          </span>
+                        </li>
+                        <li class="mdl-list__item">
+                          <span class="mdl-list__item-primary-content">
+		            <a id="phase1-location" class="mdl-navigation__link">Logistic Requirements</a>
+                          </span>
+                        </li>
+                      </ul>
+                      </p>
+	            </div>
+	            <div class="mdl-dialog__actions mdl-dialog__actions--full-width">
+                      <button type="button" class="mdl-button close">Back</button>
+                    </div>
+                  </dialog>
                 </span>
               </li>
               <li class="mdl-list__item">
@@ -63,6 +109,21 @@
     missionPlanningDialog.querySelector('.close').addEventListener('click', function() {
       console.log("Closing missionPlanningDialog");
       missionPlanningDialog.close();
+    }); 
+
+    var phase1Dialog = document.querySelector('#phase1-dialog');
+    var phase1Link = document.querySelector('#phase1-link');
+    if (! phase1Dialog.showModal) {
+      console.log("Registering phase1Dialog");
+      dialogPolyfill.registerDialog(phase1Dialog);
+    }
+    phase1Link.addEventListener('click', function() {
+      console.log("Showing phase1Dialog");
+      phase1Dialog.showModal();
+    });
+    phase1Dialog.querySelector('.close').addEventListener('click', function() {
+      console.log("Closing phase1Dialog");
+      phase1Dialog.close();
     }); 
   </script>
 </body>
