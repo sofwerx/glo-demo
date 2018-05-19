@@ -63,11 +63,16 @@ handler.setInputAction(function(click) {
 
     curMissionPlan.cartographicPosition = cartographicPosition;
     curMissionPlan.mgrs = mgrs_str;
+    if (curMissionPlan.cesiumBB) {
+      curMissionPlan.cesiumBB.destroy();
+    }
     curMissionPlan.cesiumBB = scene.primitives.add(new Cesium.BillboardCollection());
     curMissionPlan.cesiumBB.add({
       position: position,
       scale: 0.25,
-      image: 'red_marker.png'
+      image: 'red_marker.png',
+      horizontalOrigin: Cesium.HorizontalOrigin.CENTER,
+      verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
     });
     beginMissionPlan();
   }
