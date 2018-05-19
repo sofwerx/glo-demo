@@ -17,6 +17,13 @@
 
 <body>
   <div class="demo-layout-transparent mdl-layout mdl-js-layout">
+
+    <div class="mdl-layout__header mdl-layout__header--transparent">
+      <div class="mdl-layout__header-row">
+        <span class="mdl-layout-title">UIC W45VAA</span>
+      </div>
+    </div>
+
     <div class="mdl-layout__drawer">
       <span class="mdl-layout-title">UIC W45VAA</span>
       <nav class="mdl-navigation">
@@ -33,6 +40,7 @@
     </main>
     <div id="divCredit" style="display: none;"></div>
 
+
     <!-- DIALOGS -->
 
     <!-- Mission Planning -->
@@ -42,58 +50,77 @@
     </dialog>
 
     <dialog id="mission-planning-dialog" class="mdl-dialog">
-      <h4>Mission Name: <input class="mdl-textfield__input" id="missionName" /></h4>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input class="mdl-textfield__input" id="missionName" value="" />
+        <label class="mdl-textfield__label" for="missionLocation">Mission Name<label>
+      </div>
+      <div class="mdl-dialog__title">
+        Timeline
+      </div>
       <div class="mdl-dialog__content">
-        <h3>Timeline</h3>
-        <p>
-        <ul class="demo-list-item mdl-list">
+        Phase 1
+        <ul class="mdl-list">
           <li class="mdl-list__item">
-            <span class="mdl-list__item-primary-content">
-                Phase 1 (May 15-20)
+            <span class="mdl-list__item-secondary-info">
+              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" id="missionLocation" value=" " />
+                <label class="mdl-textfield__label" for="missionLocation">Location (MGRS)<label>
+              </div>
+              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input " type="text" id="missionStartDate" value=" " />
+                <label class="mdl-textfield__label" for="missionStartDate">Start Date (MM/DD/YYYY)<label>
+              </div>
+              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" id="missionEndDate" value=" " />
+                <label class="mdl-textfield__label" for="missionEndDate">End Date (MM/DD/YYYY)<label>
+              </div>
+              <button type="button" class="mdl-button mdl-button--raised" id="phase1-link">Next</button>
             </span>
           </li>
+          <hr />
           <li class="mdl-list__item">
             <span class="mdl-list__item-primary-content">
-                Location:  <input class="mdl-textfield__input" id="missionLocation" />
-            </span>
-          </li>
-          <li class="mdl-list__item">
-            <span class="mdl-list__item-primary-content">
-              <a id="phase2-link" class="mdl-navigation__link">Phase 2 (May 21-31)</a>
+              <button id="phase2-link" class="mdl-button mdl-button--raised">Add Phase</button>
             </span>
           </li>
         </ul>
-        </p>
     </div>
     <div class="mdl-dialog__actions">
-          <button type="button" class="mdl-button mdl-button--raised" id="phase1-link">Next</button>
-          <button type="button" class="mdl-button mdl-button--raised close" id="backBtn">Back</button>
+          <button type="button" class="mdl-button mdl-button--raised close" id="backBtn">Close</button>
       </div>
+    </div>
   </dialog>
 
   <!-- New mission Phase I needs -->
   <dialog id="phase1-dialog" class="mdl-dialog">
-          <h4 class="mdl-dialog__title">Phase 1</h4>
+          <div class="mdl-dialog__title" id="mission-name-heading">(Mission Name)</div>
           <div class="mdl-dialog__content">
             <ul class="demo-list-item mdl-list">
               <li class="mdl-list__item">
+                <span class="mdl-list__item-primary-content">Phase 1</span>
+              </li>
+              <li class="mdl-list__item">
                 <span class="mdl-list__item-primary-content">
-                  <h4 id="mission-name-heading">Mission Name</h4>
+                  Location:
+                  <span id="missionLocation"></span>
                 </span>
               </li>
               <li class="mdl-list__item">
                 <span class="mdl-list__item-primary-content">
-      Start date: May 15, 2018
+                  Start:
+                  <span class="mdl-list__item-primary-content" id="missionStartDate"></span>
                 </span>
               </li>
               <li class="mdl-list__item">
                 <span class="mdl-list__item-primary-content">
-      End date: May 20, 2018
+                  End:
+                  <span class="mdl-list__item-primary-content" id="missionEndDate"></span>
                 </span>
               </li>
               <li class="mdl-list__item">
                 <span class="mdl-list__item-primary-content">
-                  Location: <span id="missionLocation"></span>
+                  Duration (days):
+                  <span class="mdl-list__item-primary-content" id="missionDuration"></span>
                 </span>
               </li>
               <li class="mdl-list__item">
@@ -120,7 +147,6 @@
           </p>
       </div>
       <div class="mdl-dialog__actions">
-            <button type="button" class="mdl-button mdl-button--raised" id="phase1-link">Next</button>
             <button type="button" class="mdl-button mdl-button--raised close" id="backBtn">Back</button>
       </div>
     </dialog>
