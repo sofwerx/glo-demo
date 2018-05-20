@@ -41,7 +41,6 @@
     </main>
     <div id="divCredit" style="display: none;"></div>
 
-
     <!-- DIALOGS -->
 
     <!-- Mission Planning -->
@@ -51,7 +50,7 @@
     </dialog>
 
     <dialog id="mission-planning-dialog" class="mdl-dialog">
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
         <input class="mdl-textfield__input" id="missionName" value="" />
         <label class="mdl-textfield__label" for="missionLocation">Mission Name<label>
       </div>
@@ -84,64 +83,63 @@
             </span>
           </li>
         </ul>
-    </div>
-    <div class="mdl-dialog__actions">
-      <button type="button" class="mdl-button mdl-button--raised" id="phase1-link">Next</button>
-      <button type="button" class="mdl-button mdl-button--raised close" id="backBtn">Close</button>
       </div>
-    </div>
-  </dialog>
+      <div class="mdl-dialog__actions">
+        <button type="button" class="mdl-button mdl-button--raised" id="phase1-link">Next</button>
+        <button type="button" class="mdl-button mdl-button--raised close" id="backBtn">Close</button>
+      </div>
+    </dialog>
 
-  <!-- New mission Phase I needs -->
-  <dialog id="phase1-dialog" class="mdl-dialog">
-          <span>Mission:</span>
-          <div class="mdl-dialog__title" id="missionNameHeading">(Mission Name)</div>
-          <div class="mdl-dialog__content">
-            <ul class="mdl-list" id="fixedItems">
-              <li class="mdl-list__item">
-                <span class="mdl-list__item-primary-content">Phase 1</span>
-              </li>
-              <li class="mdl-list__item">
-                  Location:
-                  <span id="missionLocation"></span>
-              </li>
-              <li class="mdl-list__item">
-                  Start:
-                  <span id="missionStartDate"></span>
-              </li>
-              <li class="mdl-list__item">
-                  End:
-                  <span id="missionEndDate"></span>
-              </li>
-              <li class="mdl-list__item">
-                  Duration (days):
-                  <span id="missionDuration"></span>
-              </li>
-              <li class="mdl-list__item">
-                  Days to Deployment: D -
-                  <span id="deploymentDays"></span>
-              </li>
-            </ul>
-            <ul class="mdl-list" id="nextActions">
-              <li class="mdl-list__item">
+    <!-- New mission Phase I needs -->
+    <dialog id="phase1-dialog" class="mdl-dialog">
+      <span>Mission:</span>
+      <div class="mdl-dialog__title" id="missionNameHeading">(Mission Name)</div>
+      <div class="mdl-dialog__content">
+        <ul class="mdl-list" id="fixedItems">
+          <li class="mdl-list__item">
+            <span class="mdl-list__item-primary-content">Phase 1</span>
+          </li>
+          <li class="mdl-list__item">
+              Location:
+              <span id="missionLocation"></span>
+          </li>
+          <li class="mdl-list__item">
+              Start:
+              <span id="missionStartDate"></span>
+          </li>
+          <li class="mdl-list__item">
+              End:
+              <span id="missionEndDate"></span>
+          </li>
+          <li class="mdl-list__item">
+              Duration (days):
+              <span id="missionDuration"></span>
+          </li>
+          <li class="mdl-list__item">
+              Days to Deployment: D -
+              <span id="deploymentDays"></span>
+          </li>
+        </ul>
+        <ul class="mdl-list" id="nextActions">
+          <li class="mdl-list__item">
 <!-- TODO: new page to specify unit / task force makeup -->
 <!--                <a class="mdl-list__item-primary-content" id="pax">PAX</a> -->
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                  <input class="mdl-textfield__input" id="totalPAX" value=" " />
-                  <label class="mdl-textfield__label" for="totalPAX">PAX (total)<label>
-                </div>
-              </li>
-              <li class="mdl-list__item">
-                <a class="mdl-list__item-primary-content" id="equipment">Equipment</a>
-              </li>
-              <li class="mdl-list__item">
-                <a class="mdl-list__item-primary-content" id="missionType">Mission Type</a>
-              </li>
-              <li class="mdl-list__item">
-                <a class="mdl-list__item-primary-content" id="logisticReqs">Logistic Requirements</a>
-              </li>
-          </ul>
-          </p>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <input class="mdl-textfield__input" id="totalPAX" value=" " />
+              <label class="mdl-textfield__label" for="totalPAX">PAX (total)<label>
+            </div>
+          </li>
+          <li class="mdl-list__item">
+            <a class="mdl-list__item-primary-content" id="equipment">Equipment</a>
+          </li>
+          <li class="mdl-list__item">
+            <a class="mdl-list__item-primary-content" id="missionType">Mission Type</a>
+          </li>
+          <li class="mdl-list__item">
+            <a class="mdl-list__item-primary-content" id="logisticReqs">Logistic Requirements</a>
+          </li>
+        </ul>
+        </p>
       </div>
       <div class="mdl-dialog__actions">
         <button type="button" class="mdl-button mdl-button--raised" id="submitBtn">Submit Request</button>
