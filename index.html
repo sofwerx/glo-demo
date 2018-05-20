@@ -16,6 +16,7 @@
 </head>
 
 <body>
+
   <div class="demo-layout-transparent mdl-layout mdl-js-layout">
 
     <div class="mdl-layout__header mdl-layout__header--transparent">
@@ -45,7 +46,7 @@
 
     <!-- Mission Planning -->
     <dialog id="select-location-prompt" class="mdl-js-snackbar mdl-snackbar">
-       <div class="mdl-snackbar__text"></div>
+      <div class="mdl-snackbar__text"></div>
       <button class="mdl-snackbar__action" type="button"></button>
     </dialog>
 
@@ -93,55 +94,46 @@
 
   <!-- New mission Phase I needs -->
   <dialog id="phase1-dialog" class="mdl-dialog">
-          <div class="mdl-dialog__title" id="mission-name-heading">(Mission Name)</div>
+          <span>Mission:</span>
+          <div class="mdl-dialog__title" id="missionNameHeading">(Mission Name)</div>
           <div class="mdl-dialog__content">
-            <ul class="demo-list-item mdl-list">
+            <ul class="mdl-list" id="fixedItems">
               <li class="mdl-list__item">
                 <span class="mdl-list__item-primary-content">Phase 1</span>
               </li>
               <li class="mdl-list__item">
-                <span class="mdl-list__item-primary-content">
                   Location:
                   <span id="missionLocation"></span>
-                </span>
               </li>
               <li class="mdl-list__item">
-                <span class="mdl-list__item-primary-content">
                   Start:
-                  <span class="mdl-list__item-primary-content" id="missionStartDate"></span>
-                </span>
+                  <span id="missionStartDate"></span>
               </li>
               <li class="mdl-list__item">
-                <span class="mdl-list__item-primary-content">
                   End:
-                  <span class="mdl-list__item-primary-content" id="missionEndDate"></span>
-                </span>
+                  <span id="missionEndDate"></span>
               </li>
               <li class="mdl-list__item">
-                <span class="mdl-list__item-primary-content">
                   Duration (days):
-                  <span class="mdl-list__item-primary-content" id="missionDuration"></span>
-                </span>
+                  <span id="missionDuration"></span>
               </li>
               <li class="mdl-list__item">
-                <span class="mdl-list__item-primary-content">
-      <a id="phase1-location" class="mdl-navigation__link">PAX</a>
-                </span>
+                  Deployment Days D+
+                  <span id="deploymentDays"></span>
+              </li>
+            </ul>
+            <ul class="mdl-list" id="nextActions">
+              <li class="mdl-list__item">
+                <a class="mdl-list__item-primary-content" id="pax">PAX</a>
               </li>
               <li class="mdl-list__item">
-                <span class="mdl-list__item-primary-content">
-      <a id="phase1-location" class="mdl-navigation__link">Equipment</a>
-                </span>
+                <a class="mdl-list__item-primary-content" id="equipment">Equipment</a>
               </li>
               <li class="mdl-list__item">
-                <span class="mdl-list__item-primary-content">
-      <a id="phase1-location" class="mdl-navigation__link">Mission Type</a>
-                </span>
+                <a class="mdl-list__item-primary-content" id="missionType">Mission Type</a>
               </li>
               <li class="mdl-list__item">
-                <span class="mdl-list__item-primary-content">
-      <a id="phase1-location" class="mdl-navigation__link">Logistic Requirements</a>
-                </span>
+                <a class="mdl-list__item-primary-content" id="logisticReqs">Logistic Requirements</a>
               </li>
           </ul>
           </p>
@@ -150,7 +142,6 @@
             <button type="button" class="mdl-button mdl-button--raised close" id="backBtn">Back</button>
       </div>
     </dialog>
-
 
 </body>
 </html>

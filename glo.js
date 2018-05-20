@@ -13,6 +13,7 @@ var viewer = new Cesium.Viewer('cesiumContainer',{
 });
 
 const MGRS_PRECISION = 3;
+const MSEC_TO_DAYS = (1000*60*60*24);
 
 function MissionPlan(name) {
 
@@ -22,6 +23,7 @@ function MissionPlan(name) {
   this.icon = null;
   this.startDate = new Date();
   this.duration = 0;
+  this.leadTime = 0;
 
   Object.defineProperty(this, "name", {
     get: function() {
@@ -149,20 +151,13 @@ function beginMissionPlan() {
 
 missionPlanningLink.addEventListener('click', beginMissionPlan);
 
-
 mStart.addEventListener('change', function() {
   [m, d, y] = mStart.value.split('/');
   curMissionPlan.startDate = new Date(y, m-1, d, 0, 0, 0);
-  // curMissionPlan.startDate.setYear(y);
-  // curMissionPlan.startDate.setMonth(m-1);
-  // curMissionPlan.startDate.setDate(d);
 });
 mEnd.addEventListener('change', function() {
   [m, d, y] = mEnd.value.split('/');
   curMissionPlan.endDate = new Date(y, m-1, d, 0, 0, 0);
-  // curMissionPlan.endDate.setYear(y);
-  // curMissionPlan.endDate.setMonth(m-1);
-  // curMissionPlan.endDate.setDate(d);
 });
 
 var phase1Dialog = document.querySelector('#phase1-dialog');
@@ -176,17 +171,25 @@ var mEnd1 = phase1Dialog.querySelector('#missionEndDate');
 
 
 function planPhaseOne() {
+  console.log("Showing phase1Dialog");
+
   mStart1.innerText = curMissionPlan.startDate.toLocaleDateString();
   mEnd1.innerText = curMissionPlan.endDate.toLocaleDateString();
+  if (!curMissionPlan.name) {
+    curMissionPlan.name = "(MISSION NAME)"
+  }
 
-  console.log("Showing phase1Dialog");
-  var mnHdg = phase1Dialog.querySelector('#mission-name-heading');
+  var mnHdg = phase1Dialog.querySelector('#missionNameHeading');
   mnHdg.innerText = curMissionPlan.name;
   var locField = phase1Dialog.querySelector('#missionLocation');
   locField.innerText = curMissionPlan.formatMGRS();
   var durationField = phase1Dialog.querySelector('#missionDuration');
-  curMissionPlan.duration = Math.floor((curMissionPlan.endDate - curMissionPlan.startDate) / (1000*60*60*24));
+  curMissionPlan.duration = Math.floor((curMissionPlan.endDate - curMissionPlan.startDate) / MSEC_TO_DAYS);
   durationField.innerText = curMissionPlan.duration;
+  curMissionPlan.deploymentDays = Math.ceil((curMissionPlan.startDate - Date.now()) / MSEC_TO_DAYS);
+  var deployField = phase1Dialog.querySelector('#deploymentDays');
+  deployField.innerText = curMissionPlan.deploymentDays;
+
   phase1Dialog.showModal();
   missionPlanningDialog.close();
 };
