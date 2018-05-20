@@ -75,7 +75,6 @@
                 <input class="mdl-textfield__input" type="text" id="missionEndDate" value=" " />
                 <label class="mdl-textfield__label" for="missionEndDate">End Date (MM/DD/YYYY)<label>
               </div>
-              <button type="button" class="mdl-button mdl-button--raised" id="phase1-link">Next</button>
             </span>
           </li>
           <hr />
@@ -87,7 +86,8 @@
         </ul>
     </div>
     <div class="mdl-dialog__actions">
-          <button type="button" class="mdl-button mdl-button--raised close" id="backBtn">Close</button>
+      <button type="button" class="mdl-button mdl-button--raised" id="phase1-link">Next</button>
+      <button type="button" class="mdl-button mdl-button--raised close" id="backBtn">Close</button>
       </div>
     </div>
   </dialog>
@@ -118,13 +118,18 @@
                   <span id="missionDuration"></span>
               </li>
               <li class="mdl-list__item">
-                  Deployment Days D+
+                  Days to Deployment: D -
                   <span id="deploymentDays"></span>
               </li>
             </ul>
             <ul class="mdl-list" id="nextActions">
               <li class="mdl-list__item">
-                <a class="mdl-list__item-primary-content" id="pax">PAX</a>
+<!-- TODO: new page to specify unit / task force makeup -->
+<!--                <a class="mdl-list__item-primary-content" id="pax">PAX</a> -->
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" id="totalPAX" value=" " />
+                  <label class="mdl-textfield__label" for="totalPAX">PAX (total)<label>
+                </div>
               </li>
               <li class="mdl-list__item">
                 <a class="mdl-list__item-primary-content" id="equipment">Equipment</a>
@@ -139,7 +144,9 @@
           </p>
       </div>
       <div class="mdl-dialog__actions">
-            <button type="button" class="mdl-button mdl-button--raised close" id="backBtn">Back</button>
+        <button type="button" class="mdl-button mdl-button--raised" id="submitBtn">Submit Request</button>
+        <button type="button" class="mdl-button mdl-button--raised hidden" id="validateBtn">Validate</button>
+        <button type="button" class="mdl-button mdl-button--raised close" id="backBtn">Back</button>
       </div>
     </dialog>
 
