@@ -17,6 +17,7 @@ export class MainMapComponent implements OnInit, AfterViewInit {
       animation: false,
       navigationHelpButton: false,
       navigationInstructionsInitiallyVisible: false,
+      creditContainer: 'divCredit',
     };
   }
 
