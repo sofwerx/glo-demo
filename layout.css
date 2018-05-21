@@ -12,6 +12,11 @@
   color: white;
 }
 
+#mission-meals-dialog {
+  left: 25%;
+  width: 50%
+}
+
 .mdl-dialog {
   position: relative;
   left: 60%;
