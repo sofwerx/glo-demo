@@ -2,7 +2,7 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
-  EventEmitter,
+  EventEmitter, Inject, NgZone,
   OnDestroy,
   OnInit,
   Output,
@@ -14,7 +14,7 @@ import * as mgrs from 'mgrs';
 import { MarkersLocationsService } from '../../../main-map/marker-layer/markers-locations.service';
 import { MapsManagerService } from 'angular-cesium';
 import { map } from 'rxjs/operators';
-import { MatDialogRef, MatSnackBar } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef, MatSnackBar } from '@angular/material';
 
 declare var Cesium;
 const MGRS_PRECISION = 3;
@@ -38,7 +38,8 @@ const MGRS_PRECISION = 3;
         <mat-datepicker #startPicker></mat-datepicker>
       </mat-form-field>
       <mat-form-field>
-        <input matInput [min]="minDate" [matDatepicker]="endPicker" placeholder="End date" [formControlName]="'endDate'">
+        <input matInput [min]="minDate" [matDatepicker]="endPicker" placeholder="End date"
+               [formControlName]="'endDate'">
         <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
         <mat-datepicker #endPicker></mat-datepicker>
       </mat-form-field>
@@ -53,7 +54,7 @@ const MGRS_PRECISION = 3;
         </button>
       </div>
       <mat-dialog-actions>
-        <button mat-raised-button color="accent" mat-dialog-close>Cancel</button>
+        <button mat-raised-button color="accent" (click)="close()">Cancel</button>
         <button mat-raised-button color="accent" (click)="onSubmit()">Next</button>
       </mat-dialog-actions>
     </form>
@@ -79,24 +80,39 @@ export class MissionPlanningFirstFormComponent implements OnInit, OnDestroy, Aft
               private markersLocationsService: MarkersLocationsService,
               private mapManager: MapsManagerService,
               public snackBar: MatSnackBar,
-              private self: MatDialogRef<MissionPlanningFirstFormComponent>) {
+              public self: MatDialogRef<MissionPlanningFirstFormComponent>,
+              private ngZone: NgZone,
+              @Inject(MAT_DIALOG_DATA) private data: { initialLocation: any }) {
     this.createForm();
+
+    this.listenToLocations();
+  }
+
+  close(){
+    this.ngZone.run(()=>{
+      this.self.close();
+
+    });
   }
 
   createForm() {
+    const location = this.data && this.data.initialLocation ? this.convertToMgrs(this.data.initialLocation) : undefined;
     this.missionForm = this.fb.group({
       missionName: '',
       startDate: moment().toISOString(),
       endDate: moment().add(1, 'month').toISOString(),
-      location: undefined,
+      location: location,
       phase: this.fb.array([]),
     });
   }
 
   onSubmit() {
-    this.markersLocationsService.stopListenToClicks();
-    const missionModel = this.missionForm.value;
-    this.self.close(missionModel);
+    this.ngZone.run(()=>{
+      const missionModel = this.missionForm.value;
+      this.self.close(missionModel);
+
+    });
+
   }
 
 
@@ -116,25 +132,23 @@ export class MissionPlanningFirstFormComponent implements OnInit, OnDestroy, Aft
       this.snackBar.open('Click on the globe to pick a location', 'OK', {
         duration: 3000,
       });
-      const markerLocations$ = this.markersLocationsService.startMapListenToClicks();
-      markerLocations$
-        .pipe(map(cartesian3 => this.convertToMgrs(cartesian3)))
-        .subscribe(mgrs => {
-          this.missionForm.patchValue({
-            location: mgrs
-          });
-        });
-    } else {
-      this.locationChoosing = false;
-      this.markersLocationsService.stopListenToClicks();
     }
+  }
+
+  private listenToLocations() {
+    this.markersLocationsService.getMarkerLocations$()
+      .pipe(map(cartesian3 => this.convertToMgrs(cartesian3)))
+      .subscribe(mgrs => {
+        this.missionForm.patchValue({
+          location: mgrs
+        });
+      });
   }
 
   ngOnInit() {
   }
 
   ngOnDestroy() {
-    this.markersLocationsService.stopListenToClicks();
   }
 
   ngAfterViewInit(): void {

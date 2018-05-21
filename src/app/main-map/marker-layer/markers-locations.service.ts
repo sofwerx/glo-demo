@@ -38,7 +38,9 @@ export class MarkersLocationsService {
 
     this.mapClicks$.subscribe(eventResult => {
       const nextPos = this.geoConverter.screenToCartesian3(eventResult.movement.endPosition, false);
-      this.markersLocations$.next(nextPos);
+      if (nextPos) {
+        this.markersLocations$.next(nextPos);
+      }
     });
 
     return this.getMarkerLocations$();
