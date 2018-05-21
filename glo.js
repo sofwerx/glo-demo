@@ -128,7 +128,11 @@ function beginMissionMeals() {
 	      }
 
         var missionMealsTableData3 = document.createElement('td');
-        missionMealsTableData3.appendChild(document.createTextNode(menu.qty));
+//        missionMealsTableData3.appendChild(document.createTextNode(menu.qty));
+        qtyInput = missionMealsTableData3.appendChild(document.createElement('input'));
+        qtyInput.type = "text";
+        qtyInput.value = menu.qty;
+        qtyInput.className = "mdl-textfield__input";
         missionMealsTableData3.className = "mdl-data-table__cell--non-numeric";
         componentHandler.upgradeElement(missionMealsTableData3);
         missionMealsTableRow.appendChild(missionMealsTableData3);
@@ -229,6 +233,11 @@ function changeTotalPAX() {
 totalPAX.addEventListener('change', changeTotalPAX);
 
 phase1Link.addEventListener('click', planPhaseOne);
+
+mealsCloseBtn = missionMealsDialog.querySelector('#missionMealsBackBtn');
+mealsCloseBtn.addEventListener('click', function() {
+  missionMealsDialog.close();
+});
 
 phase1Dialog.querySelector('.close').addEventListener('click', function() {
   console.log("Closing phase1Dialog");
