@@ -1,6 +1,6 @@
 import { Injectable, OnInit } from '@angular/core';
 import {
-  AcNotification, Cartesian3,
+  Cartesian3,
   CesiumEvent,
   CoordinateConverter,
   MapEventsManagerService,

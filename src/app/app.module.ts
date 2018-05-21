@@ -13,7 +13,7 @@ import {
   MatListModule,
   MatInputModule,
   MatDatepickerModule,
-  MatFormFieldModule, MatTooltipModule
+  MatFormFieldModule, MatTooltipModule, MatSnackBarModule
 } from '@angular/material';
 import { AngularCesiumModule } from 'angular-cesium';
 import { MainMapComponent } from './main-map/main-map.component';
@@ -46,6 +46,7 @@ import { MarkerLayerComponent } from './main-map/marker-layer/marker-layer.compo
     MatMomentDateModule,
     MatTooltipModule,
     MatDatepickerModule,
+    MatSnackBarModule,
     AngularCesiumModule.forRoot(),
   ],
   providers: [],

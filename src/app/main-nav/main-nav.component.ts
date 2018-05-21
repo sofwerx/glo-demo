@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./main-nav.component.css']
 })
 export class MainNavComponent {
-  isHandset: Observable<BreakpointState> = this.breakpointObserver.observe(Breakpoints.Handset);
+  showMissionPlanning = false;
+
   constructor(private breakpointObserver: BreakpointObserver) {}
 }
