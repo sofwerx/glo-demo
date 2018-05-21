@@ -12,9 +12,6 @@ var viewer = new Cesium.Viewer('cesiumContainer',{
   timeline : false
 });
 
-const MGRS_PRECISION = 3;
-const MSEC_TO_DAYS = (1000*60*60*24);
-
 var curMissionPlan = new MissionPlan("");
 
 var scene = viewer.scene;
@@ -53,6 +50,50 @@ console.log("Cesium Initialized");
 //var menuDrawer = document.querySelector('.mdl-navigation__link-drawer');
 var missionPlanningDialog = document.querySelector('#mission-planning-dialog');
 var missionPlanningLink = document.querySelector('#mission-planning-link');
+var missionMealsDialog = document.querySelector('#mission-meals-dialog');
+var missionMealsLink = document.querySelector('#mission-meals-link');
+
+var meals = [
+  {
+    cycle: "F-F-F",
+    duration: 3,
+    menus: [
+      {
+        qty: 20,
+	description: "FSR"
+      }
+    ]
+  },
+  {
+    cycle: "M-M-M",
+    duration: 17,
+    menus: [
+      {
+        qty: 20,
+	description: "MRE"
+      }
+    ]
+  },
+  {
+    cycle: "U-M-U",
+    duration: 9,
+    menus: [
+      {
+        qty: 20,
+	description: "MRE"
+      },
+      {
+        qty: 10,
+	description: "UGR Menu 3"
+      },
+      {
+        qty: 10,
+	description: "UGR Menu 7"
+      }
+    ]
+  }
+
+];
 
 if (! missionPlanningDialog.showModal) {
   console.log("Registering missionPlanningDialog");
@@ -69,6 +110,26 @@ missionPlanningDialog.querySelector('#missionName').addEventListener('change', f
 });
 var mStart =  missionPlanningDialog.querySelector('#missionStartDate');
 var mEnd = missionPlanningDialog.querySelector('#missionEndDate');
+
+function beginMissionMeals() {
+    console.log("Showing missionMealsDialog");
+
+    meals.forEach(function(meal) {
+      var cycle = meal.cycle;
+      console.log("cycle = "+cycle);
+      var duration = meal.duration;
+      console.log("duration = "+duration);
+      var menus = meal.menus;
+      menus.forEach(function(menu) {
+        var qty = menu.qty;
+        console.log("qty = "+qty);
+        var description = menu.description;
+        console.log("description = "+description);
+      });
+    });
+
+    missionMealsDialog.showModal();
+}
 
 function beginMissionPlan() {
     var d = document.querySelector('.mdl-layout__drawer.is-visible');
@@ -101,6 +162,7 @@ function beginMissionPlan() {
 };
 
 missionPlanningLink.addEventListener('click', beginMissionPlan);
+missionMealsLink.addEventListener('click', beginMissionMeals);
 
 mStart.addEventListener('change', function() {
   [m, d, y] = mStart.value.split('/');
