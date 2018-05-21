@@ -1,17 +1,23 @@
 <ac-layer acFor="let marker of markers$" [show]="show" [context]="this">
+  <ac-polyline-desc props="{
+    width : 25,
+    positions: getRoute(marker.position),
+    material: routeMaterial
+  }">
+  </ac-polyline-desc>
   <ac-billboard-desc props="{
-      image: marker.image,
-      position: marker.position,
-      scale: 0.08
-    }">
+    image: marker.image,
+    position: marker.position,
+    scale: 0.08
+  }">
   </ac-billboard-desc>
   <ac-label-primitive-desc props="{
-        position: marker.position,
-        pixelOffset : [-20,40] | pixelOffset,
-        text: marker.text,
-        font: '20px  sans-serif',
-        showBackground: true,
-        scale: 0.7
-    }">
+    position: marker.position,
+    pixelOffset : [-20,40] | pixelOffset,
+    text: marker.text,
+    font: '20px  sans-serif',
+    showBackground: true,
+    scale: 0.7
+  }">
   </ac-label-primitive-desc>
 </ac-layer>
