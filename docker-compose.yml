@@ -1,0 +1,11 @@
+version: '2.1'
+
+services:
+
+  glo:
+    container_name: glo
+    hostname: glo
+    build: .
+    image: glo
+    ports:
+     - 4200:4200
