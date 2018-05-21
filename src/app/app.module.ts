@@ -13,7 +13,7 @@ import {
   MatListModule,
   MatInputModule,
   MatDatepickerModule,
-  MatFormFieldModule, MatTooltipModule, MatSnackBarModule
+  MatFormFieldModule, MatTooltipModule, MatSnackBarModule, MatExpansionModule
 } from '@angular/material';
 import { AngularCesiumModule } from 'angular-cesium';
 import { MainMapComponent } from './main-map/main-map.component';
@@ -21,6 +21,8 @@ import { MissionPlanningFirstFormComponent } from './main-nav/mission-planning/m
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatMomentDateModule } from "@angular/material-moment-adapter";
 import { MarkerLayerComponent } from './main-map/marker-layer/marker-layer.component';
+import { MissonPlanningSercondFormComponent } from './main-nav/mission-planning/misson-planning-sercond-form/misson-planning-sercond-form.component';
+import { MissionPlanningAccordionComponent } from './main-nav/mission-planning/mission-planning-accordion/mission-planning-accordion.component';
 
 
 @NgModule({
@@ -29,7 +31,9 @@ import { MarkerLayerComponent } from './main-map/marker-layer/marker-layer.compo
     MainNavComponent,
     MainMapComponent,
     MissionPlanningFirstFormComponent,
-    MarkerLayerComponent
+    MarkerLayerComponent,
+    MissonPlanningSercondFormComponent,
+    MissionPlanningAccordionComponent
   ],
   imports: [
     BrowserModule,
@@ -47,6 +51,7 @@ import { MarkerLayerComponent } from './main-map/marker-layer/marker-layer.compo
     MatTooltipModule,
     MatDatepickerModule,
     MatSnackBarModule,
+    MatExpansionModule,
     AngularCesiumModule.forRoot(),
   ],
   providers: [],
