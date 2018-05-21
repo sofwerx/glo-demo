@@ -53,8 +53,8 @@ const MSEC_TO_DAYS = (1000*60*60*24);
 //var menuDrawer = document.querySelector('.mdl-navigation__link-drawer');
 var missionPlanningDialog = document.querySelector('#mission-planning-dialog');
 var missionPlanningLink = document.querySelector('#mission-planning-link');
+var logisticReqsLink = document.querySelector('#logisticReqs');
 var missionMealsDialog = document.querySelector('#mission-meals-dialog');
-var missionMealsLink = document.querySelector('#mission-meals-link');
 var missionMealsTbody = document.querySelector('#mission-meals-tbody');
 var totalPAX = document.querySelector('#totalPAX');
 
@@ -74,27 +74,33 @@ missionPlanningDialog.querySelector('#missionName').addEventListener('change', f
 var mStart =  missionPlanningDialog.querySelector('#missionStartDate');
 var mEnd = missionPlanningDialog.querySelector('#missionEndDate');
 
+var daystart;
+
 function beginMissionMeals() {
     console.log("Showing missionMealsDialog");
 
-    var day = 1;
+    daystart = 1;
 
-    var daystart = day;
-    var dayend = daystart;
+    curMissionPlan.populateMeals();
+    console.log("curMissionPlan.meals = " + JSON.stringify(curMissionPlan.meals));
 
     curMissionPlan.meals.forEach(function(meal) {
       var missionMealsTableRow = document.createElement('tr');
       missionMealsTbody.appendChild(missionMealsTableRow);
 
-      daystart = day
-      dayend = day + meal.duration;
-      day = dayend
+      dayend = daystart + meal.duration - 1;
+      console.log("daystart1 = " + daystart);
+      console.log("meal.duration = " + meal.duration);
+      console.log("dayend1 = " + dayend);
 
       var missionMealsTableData1 = document.createElement('td');
-      missionMealsTableData1.appendChild(document.createTextNode("D + " + daystart));
+      missionMealsTableData1.appendChild(document.createTextNode( " " + daystart + "-" + dayend));
       missionMealsTableData1.className = "mdl-data-table__cell--non-numeric";
       componentHandler.upgradeElement(missionMealsTableData1);
       missionMealsTableRow.appendChild(missionMealsTableData1);
+
+      daystart = dayend + 1
+      console.log("daystart2 = " + daystart);
 
       var missionMealsTableData2 = document.createElement('td');
       missionMealsTableData2.appendChild(document.createTextNode(meal.cycle));
@@ -170,7 +176,8 @@ function beginMissionPlan() {
 };
 
 missionPlanningLink.addEventListener('click', beginMissionPlan);
-missionMealsLink.addEventListener('click', beginMissionMeals);
+
+logisticReqsLink.addEventListener('click', beginMissionMeals);
 
 mStart.addEventListener('change', function() {
   [m, d, y] = mStart.value.split('/');
