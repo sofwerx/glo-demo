@@ -12,6 +12,8 @@
   <script src="mgrs/mgrs.js"></script>
   <script defer src="mdl/material.min.js"></script>
   <script defer src="js/MissionPlan.js"></script>
+  <script defer src="js/equipment.js"></script>
+  <script defer src="js/meals.js"></script>
   <script defer src="glo.js"></script>
   <link rel="stylesheet" href="layout.css"></link>
 </head>
@@ -84,6 +86,7 @@
       </div>
     </dialog>
 
+    <!-- Meals -->
     <dialog id="mission-meals-dialog" class="mdl-dialog">
       <span>Meals:</span>
       <div id="mission-meals-content" class="mdl-dialog__content">
@@ -102,6 +105,32 @@
       </div>
       <div class="mdl-dialog__actions">
         <button type="button" class="mdl-button mdl-button--raised close" id="missionMealsBackBtn">Save</button>
+      </div>
+    </dialog>
+
+    <!-- Equipment -->
+    <dialog id="mission-equipment-dialog">
+      <span>Mission:</span>
+      <div class="mdl-dialog__title" id="missionNameHeading">(Mission Name)</div>
+        <div class="mdl-dialog__content">
+        <span>Equipment:</span>
+        <div id="mission-equipment-content">
+          <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+            <thead>
+              <tr>
+                <th>Qty Avail</th>
+                <th>Qty Req</th>
+                <th class="mdl-data-table__cell--non-numeric">Name</th>
+                <th class="mdl-data-table__cell--non-numeric">LIN</th>
+              </tr>
+            </thead>
+            <tbody id="mission-equipment-tbody">
+            </tbody>
+          </table>
+        </div>
+        <div class="mdl-dialog__actions">
+          <button type="button" class="mdl-button mdl-button--raised close" id="missionEquipmentBackBtn">Save</button>
+        </div>
       </div>
     </dialog>
 
@@ -145,7 +174,7 @@
             </div>
           </li>
           <li class="mdl-list__item">
-            <a class="mdl-navigation__link" id="equipment">Equipment</a>
+            <a class="mdl-navigation__link" id="missionEquipment">Equipment</a>
           </li>
           <li class="mdl-list__item">
             <a class="mdl-navigation__link" id="missionType">Mission Type</a>
