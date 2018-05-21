@@ -1,0 +1,12 @@
+.mission-form {
+  display: flex;
+  justify-content: flex-start;
+  /*align-items: center;*/
+  flex-direction: column;
+  padding: 10px;
+}
+
+.add-phase-row {
+  display: flex;
+  justify-content: flex-end;
+}
