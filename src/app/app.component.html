@@ -1,12 +1,15 @@
-<mat-sidenav-container class="sidenav-container">
+<mat-sidenav-container class="sidenav-container" [hasBackdrop]="true">
   <mat-sidenav
     #drawer
     class="sidenav"
-    [mode]="'side'"
-    [opened]="true">
-    <main-nav></main-nav>
+    [mode]="'over'"
+    [(opened)]="sidenavOpen">
+    <main-nav (onMenuItemClick)="closeSideNav()"></main-nav>
   </mat-sidenav>
   <mat-sidenav-content>
+    <button mat-icon-button (click)="drawer.toggle()" class="menu-btn">
+      <mat-icon aria-label="Example icon-button with a heart icon">menu</mat-icon>
+    </button>
     <main-map></main-map>
   </mat-sidenav-content>
 </mat-sidenav-container>
