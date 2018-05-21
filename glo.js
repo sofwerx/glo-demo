@@ -58,48 +58,6 @@ var missionMealsLink = document.querySelector('#mission-meals-link');
 var missionMealsTbody = document.querySelector('#mission-meals-tbody');
 var totalPAX = document.querySelector('#totalPAX');
 
-var meals = [
-  {
-    cycle: "F-F-F",
-    duration: 2,
-    menus: [
-      {
-        qty: 20,
-	description: "FSR"
-      }
-    ]
-  },
-  {
-    cycle: "M-M-M",
-    duration: 17,
-    menus: [
-      {
-        qty: 20,
-	description: "MRE"
-      }
-    ]
-  },
-  {
-    cycle: "U-M-U",
-    duration: 9,
-    menus: [
-      {
-        qty: 20,
-	description: "MRE"
-      },
-      {
-        qty: 10,
-	description: "UGR Menu 3"
-      },
-      {
-        qty: 10,
-	description: "UGR Menu 7"
-      }
-    ]
-  }
-
-];
-
 if (! missionPlanningDialog.showModal) {
   console.log("Registering missionPlanningDialog");
   dialogPolyfill.registerDialog(missionPlanningDialog);
@@ -124,7 +82,7 @@ function beginMissionMeals() {
     var daystart = day;
     var dayend = daystart;
 
-    meals.forEach(function(meal) {
+    curMissionPlan.meals.forEach(function(meal) {
       var missionMealsTableRow = document.createElement('tr');
       missionMealsTbody.appendChild(missionMealsTableRow);
 
