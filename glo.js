@@ -12,58 +12,6 @@ var viewer = new Cesium.Viewer('cesiumContainer',{
   timeline : false
 });
 
-const MGRS_PRECISION = 3;
-const MSEC_TO_DAYS = (1000*60*60*24);
-
-function MissionPlan(name) {
-
-  // Phase I -- these should go in an array of phase objs eventually
-  this.cartographicPosition = null;
-  this.mgrs = null;
-  this.icon = null;
-  this.startDate = new Date();
-  this.duration = 0;
-  this.leadTime = 0;
-
-  Object.defineProperty(this, "name", {
-    get: function() {
-        return name;
-    },
-    set: function(newName) {
-        name = newName;
-    },
-    enumerable: true,
-    configurable: true
-  });
-
-  Object.defineProperty(this, "endDate", {
-    get: function() {
-        return endDate;
-    },
-    set: function(newDate) {
-        endDate = newDate;
-    },
-    enumerable: true,
-    configurable: true
-  });
-
-  this.name = name;
-  this.endDate = new Date();
-
-  this.logName = function() {
-    console.log(this.name);
-  };
-
-  this.formatMGRS = function() {
-    var str = "";
-    str = str + this.mgrs.substr(0,3) + " ";
-    str = str + this.mgrs.substr(3,2) + " ";
-    str = str + this.mgrs.substr(5,3) + " ";
-    str = str + this.mgrs.substr(8);
-    return(str);
-  }
-}
-
 var curMissionPlan = new MissionPlan("");
 
 var scene = viewer.scene;
@@ -102,6 +50,51 @@ console.log("Cesium Initialized");
 //var menuDrawer = document.querySelector('.mdl-navigation__link-drawer');
 var missionPlanningDialog = document.querySelector('#mission-planning-dialog');
 var missionPlanningLink = document.querySelector('#mission-planning-link');
+var missionMealsDialog = document.querySelector('#mission-meals-dialog');
+var missionMealsLink = document.querySelector('#mission-meals-link');
+var missionMealsTbody = document.querySelector('#mission-meals-tbody');
+
+var meals = [
+  {
+    cycle: "F-F-F",
+    duration: 3,
+    menus: [
+      {
+        qty: 20,
+	description: "FSR"
+      }
+    ]
+  },
+  {
+    cycle: "M-M-M",
+    duration: 17,
+    menus: [
+      {
+        qty: 20,
+	description: "MRE"
+      }
+    ]
+  },
+  {
+    cycle: "U-M-U",
+    duration: 9,
+    menus: [
+      {
+        qty: 20,
+	description: "MRE"
+      },
+      {
+        qty: 10,
+	description: "UGR Menu 3"
+      },
+      {
+        qty: 10,
+	description: "UGR Menu 7"
+      }
+    ]
+  }
+
+];
 
 if (! missionPlanningDialog.showModal) {
   console.log("Registering missionPlanningDialog");
@@ -118,6 +111,62 @@ missionPlanningDialog.querySelector('#missionName').addEventListener('change', f
 });
 var mStart =  missionPlanningDialog.querySelector('#missionStartDate');
 var mEnd = missionPlanningDialog.querySelector('#missionEndDate');
+
+function beginMissionMeals() {
+    console.log("Showing missionMealsDialog");
+
+    meals.forEach(function(meal) {
+      var missionMealsTableRow = document.createElement('tr');
+      missionMealsTbody.appendChild(missionMealsTableRow);
+
+      var missionMealsTableData1 = document.createElement('td');
+      missionMealsTableData1.appendChild(document.createTextNode("D + " + meal.duration));
+      missionMealsTableData1.className = "mdl-data-table__cell--non-numeric";
+      componentHandler.upgradeElement(missionMealsTableData1);
+      missionMealsTableRow.appendChild(missionMealsTableData1);
+
+      var missionMealsTableData2 = document.createElement('td');
+      missionMealsTableData2.appendChild(document.createTextNode(meal.cycle));
+      missionMealsTableData2.className = "mdl-data-table__cell--non-numeric";
+      componentHandler.upgradeElement(missionMealsTableData2);
+      missionMealsTableRow.appendChild(missionMealsTableData2);
+      
+      var menus = meal.menus;
+      menus.forEach(function(menu) {
+
+        if(menus.length > 1) {
+          missionMealsTableRow = document.createElement('tr');
+          missionMealsTbody.appendChild(missionMealsTableRow);
+
+          var missionMealsTableData1 = document.createElement('td');
+          missionMealsTableData1.appendChild(document.createTextNode(''));
+          missionMealsTableData1.className = "mdl-data-table__cell--non-numeric";
+          componentHandler.upgradeElement(missionMealsTableData1);
+          missionMealsTableRow.appendChild(missionMealsTableData1);
+
+          var missionMealsTableData2 = document.createElement('td');
+          missionMealsTableData2.appendChild(document.createTextNode(''));
+          missionMealsTableData2.className = "mdl-data-table__cell--non-numeric";
+          componentHandler.upgradeElement(missionMealsTableData2);
+          missionMealsTableRow.appendChild(missionMealsTableData2);
+	}
+
+        var missionMealsTableData3 = document.createElement('td');
+        missionMealsTableData3.appendChild(document.createTextNode(menu.qty));
+        missionMealsTableData3.className = "mdl-data-table__cell--non-numeric";
+        componentHandler.upgradeElement(missionMealsTableData3);
+        missionMealsTableRow.appendChild(missionMealsTableData3);
+
+        var missionMealsTableData4 = document.createElement('td');
+        missionMealsTableData4.appendChild(document.createTextNode(menu.description));
+        missionMealsTableData4.className = "mdl-data-table__cell--non-numeric";
+        componentHandler.upgradeElement(missionMealsTableData4);
+        missionMealsTableRow.appendChild(missionMealsTableData4);
+      });
+    });
+
+    missionMealsDialog.showModal();
+}
 
 function beginMissionPlan() {
     var d = document.querySelector('.mdl-layout__drawer.is-visible');
@@ -150,6 +199,7 @@ function beginMissionPlan() {
 };
 
 missionPlanningLink.addEventListener('click', beginMissionPlan);
+missionMealsLink.addEventListener('click', beginMissionMeals);
 
 mStart.addEventListener('change', function() {
   [m, d, y] = mStart.value.split('/');

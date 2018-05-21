@@ -11,6 +11,7 @@
   <script src="Cesium/Cesium.js"></script>
   <script src="mgrs/mgrs.js"></script>
   <script defer src="mdl/material.min.js"></script>
+  <script defer src="js/MissionPlan.js"></script>
   <script defer src="glo.js"></script>
   <link rel="stylesheet" href="layout.css"></link>
 </head>
@@ -25,6 +26,7 @@
         <a class="mdl-navigation__link" href="">Ongoing OPS</a>
         <a class="mdl-navigation__link" href="">Estimation Tool</a>
         <a class="mdl-navigation__link" href="">Intel Tool</a>
+        <a id="mission-meals-link" class="mdl-navigation__link">Mission Meals</a>
       </nav>
     </div>
 
@@ -80,6 +82,28 @@
       <div class="mdl-dialog__actions">
         <button type="button" class="mdl-button mdl-button--raised" id="phase1-link">Next</button>
         <button type="button" class="mdl-button mdl-button--raised close" id="backBtn">Close</button>
+      </div>
+    </dialog>
+
+    <dialog id="mission-meals-dialog" class="mdl-dialog">
+      <span>Meals:</span>
+      <div id="mission-meals-content" class="mdl-dialog__content">
+        <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+          <thead>
+            <tr>
+              <th class="mdl-data-table__cell--non-numeric">Mission Day</th>
+              <th>Ration cycle</th>
+              <th>Quantity</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody id="mission-meals-tbody">
+          </tbody>
+        </table>
+      </div>
+      <div class="mdl-dialog__actions">
+        <button type="button" class="mdl-button mdl-button--raised" id="mission-meals-link">Next</button>
+        <button type="button" class="mdl-button mdl-button--raised close" id="missionMealsBackBtn">Close</button>
       </div>
     </dialog>
 

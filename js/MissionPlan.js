@@ -140,6 +140,4 @@ function MissionPlan(name) {
     str = str + this.mgrs.substr(8);
     return(str);
   }
-
-
 }
