@@ -1,39 +1,48 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { MatDialog } from '@angular/material';
 import { MissionPlanningFirstFormComponent } from './mission-planning/mission-planning-first-form/mission-planning-first-form.component';
 import { MatDialogRef } from '@angular/material/dialog/typings/dialog-ref';
 import { MissonPlanningSercondFormComponent } from './mission-planning/misson-planning-sercond-form/misson-planning-sercond-form.component';
+import { MarkersLocationsService } from "../main-map/marker-layer/markers-locations.service";
+import { Cartesian3 } from "angular-cesium";
 
 @Component({
   selector: 'main-nav',
   templateUrl: './main-nav.component.html',
   styleUrls: ['./main-nav.component.css']
 })
-export class MainNavComponent {
+export class MainNavComponent implements OnInit {
   missionDialogFirstRef: MatDialogRef<MissionPlanningFirstFormComponent>;
   missionDialogSecRef: MatDialogRef<MissonPlanningSercondFormComponent>;
-  missionDialogOpen = false;
+  missionDialogOpenFirst = false;
+  missionDialogOpenSecond = false;
 
   @Output()
   onMenuItemClick = new EventEmitter();
 
-  constructor(public dialog: MatDialog) {
+  constructor(public dialog: MatDialog, private markerService: MarkersLocationsService) {
   }
 
-  openMissionPlanning() {
-    if (!this.missionDialogOpen) {
+  openMissionPlanning(initialCartesian3?: Cartesian3) {
+    if (!this.missionDialogOpenFirst && !this.missionDialogOpenSecond) {
+      console.log('open');
       this.onMenuItemClick.emit();
       this.missionDialogFirstRef = this.dialog.open(MissionPlanningFirstFormComponent, {
         height: '530px',
         width: '350px',
+        data: {
+          initialLocation: initialCartesian3,
+        }
       });
-      this.missionDialogOpen = true;
+      this.missionDialogOpenFirst = true;
+
       const close$ = this.missionDialogFirstRef.afterClosed().subscribe((firstFormValues) => {
         close$.unsubscribe();
-        this.missionDialogOpen = false;
+        this.missionDialogOpenFirst = false;
         if (firstFormValues) {
+          this.markerService.stopListenToClicks();
           this.missionDialogSecRef = this.dialog.open(MissonPlanningSercondFormComponent, {
             height: '530px',
             width: '350px',
@@ -41,7 +50,10 @@ export class MainNavComponent {
               firstFormValues,
             }
           });
+          this.missionDialogOpenSecond = true;
           this.missionDialogSecRef.afterClosed().subscribe((result) => {
+            this.missionDialogOpenSecond = false;
+            this.markerService.startMapListenToClicks();
             if (result && result.shouldGoBack) {
               this.openMissionPlanning();
             }
@@ -51,5 +63,14 @@ export class MainNavComponent {
 
 
     }
+  }
+
+  ngOnInit(): void {
+    setTimeout(() => {
+      this.markerService.startMapListenToClicks();
+      this.markerService.getMarkerLocations$().subscribe(cartesian3 => {
+        this.openMissionPlanning(cartesian3);
+      });
+    }, 0);
   }
 }
