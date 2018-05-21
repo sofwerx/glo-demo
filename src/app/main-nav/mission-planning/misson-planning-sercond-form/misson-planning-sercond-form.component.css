@@ -1,0 +1,32 @@
+.mission-form {
+  display: flex;
+  justify-content: flex-start;
+  /*align-items: center;*/
+  flex-direction: column;
+  /*padding: 15px;*/
+}
+
+.info-container {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+
+}
+
+.info-container .mat-body-2 {
+  padding-right: 5px;
+}
+
+.info-container-row {
+  display: flex;
+  align-items: center;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+}
+
+.action-btn {
+  margin: 5px;
+}

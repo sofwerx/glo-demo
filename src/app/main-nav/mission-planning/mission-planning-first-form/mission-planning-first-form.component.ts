@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from "@angular/forms";
 import * as moment from "moment";
 import * as mgrs from 'mgrs';
@@ -13,7 +13,7 @@ const MGRS_PRECISION = 3;
   selector: 'mission-planning-first-form',
   template: `
     <mat-divider></mat-divider>
-    <form [formGroup]="missionForm" (ngSubmit)="onSubmit()" class="mission-form">
+    <form [formGroup]="missionForm"  class="mission-form">
       <div>
         <mat-form-field appearance="outline">
           <mat-label>Mission Name</mat-label>
@@ -22,12 +22,12 @@ const MGRS_PRECISION = 3;
       </div>
       <div class="mat-subheading-2">Phase 1 Time line</div>
       <mat-form-field>
-        <input matInput [matDatepicker]="startPicker" placeholder="Start date" [formControlName]="'startDate'">
+        <input matInput [min]="minDate" [matDatepicker]="startPicker" placeholder="Start date" [formControlName]="'startDate'">
         <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
         <mat-datepicker #startPicker></mat-datepicker>
       </mat-form-field>
       <mat-form-field>
-        <input matInput [matDatepicker]="endPicker" placeholder="End date">
+        <input matInput [min]="minDate" [matDatepicker]="endPicker" placeholder="End date">
         <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
         <mat-datepicker #endPicker></mat-datepicker>
       </mat-form-field>
@@ -38,29 +38,34 @@ const MGRS_PRECISION = 3;
       </mat-form-field>
       <div class="add-phase-row">
         <button matTooltip="Add Phase" mat-mini-fab color="primary">
-          <mat-icon matSuffix (click)="chooseLocation()">add</mat-icon>
+          <mat-icon matSuffix >add</mat-icon>
         </button>
       </div>
       <p class="mat-action-row">
-        <button mat-raised-button color="accent" class="action-btn">Cancel</button>
-        <button mat-raised-button color="accent" class="action-btn">Next</button>
+        <button mat-raised-button color="accent" (click)="onCancel.emit()"class="action-btn">Cancel</button>
+        <button type="submit" (click)="onSubmit()" mat-raised-button color="accent" class="action-btn">Next</button>
       </p>
     </form>
   `,
   styleUrls: ['./mission-planning-first-form.component.css']
 })
-export class MissionPlanningFirstFormComponent implements OnInit {
+export class MissionPlanningFirstFormComponent implements OnInit, OnDestroy{
 
   missionForm: FormGroup;
   locationChoosing = false;
+  minDate = new Date(2000, 0, 1);
+
+  @Output()
+  onFormSubmit = new EventEmitter();
+
+  @Output()
+  onCancel = new EventEmitter();
 
   constructor(private fb: FormBuilder,
               private markersLocationsService: MarkersLocationsService,
               private mapManager: MapsManagerService,
               public snackBar: MatSnackBar) {
     this.createForm();
-
-
   }
 
   createForm() {
@@ -74,8 +79,9 @@ export class MissionPlanningFirstFormComponent implements OnInit {
   }
 
   onSubmit() {
+    this.markersLocationsService.stopListenToClicks();
     const missionModel = this.missionForm.value;
-    // TODO open second stage
+    this.onFormSubmit.emit(missionModel);
   }
 
 
@@ -112,4 +118,7 @@ export class MissionPlanningFirstFormComponent implements OnInit {
   ngOnInit() {
   }
 
+  ngOnDestroy(){
+    this.markersLocationsService.stopListenToClicks();
+  }
 }
