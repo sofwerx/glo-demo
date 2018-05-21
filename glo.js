@@ -52,6 +52,7 @@ var missionPlanningDialog = document.querySelector('#mission-planning-dialog');
 var missionPlanningLink = document.querySelector('#mission-planning-link');
 var missionMealsDialog = document.querySelector('#mission-meals-dialog');
 var missionMealsLink = document.querySelector('#mission-meals-link');
+var missionMealsTbody = document.querySelector('#mission-meals-tbody');
 
 var meals = [
   {
@@ -115,16 +116,52 @@ function beginMissionMeals() {
     console.log("Showing missionMealsDialog");
 
     meals.forEach(function(meal) {
-      var cycle = meal.cycle;
-      console.log("cycle = "+cycle);
-      var duration = meal.duration;
-      console.log("duration = "+duration);
+      var missionMealsTableRow = document.createElement('tr');
+      missionMealsTbody.appendChild(missionMealsTableRow);
+
+      var missionMealsTableData1 = document.createElement('td');
+      missionMealsTableData1.appendChild(document.createTextNode("D + " + meal.duration));
+      missionMealsTableData1.className = "mdl-data-table__cell--non-numeric";
+      componentHandler.upgradeElement(missionMealsTableData1);
+      missionMealsTableRow.appendChild(missionMealsTableData1);
+
+      var missionMealsTableData2 = document.createElement('td');
+      missionMealsTableData2.appendChild(document.createTextNode(meal.cycle));
+      missionMealsTableData2.className = "mdl-data-table__cell--non-numeric";
+      componentHandler.upgradeElement(missionMealsTableData2);
+      missionMealsTableRow.appendChild(missionMealsTableData2);
+      
       var menus = meal.menus;
       menus.forEach(function(menu) {
-        var qty = menu.qty;
-        console.log("qty = "+qty);
-        var description = menu.description;
-        console.log("description = "+description);
+
+        if(menus.length > 1) {
+          missionMealsTableRow = document.createElement('tr');
+          missionMealsTbody.appendChild(missionMealsTableRow);
+
+          var missionMealsTableData1 = document.createElement('td');
+          missionMealsTableData1.appendChild(document.createTextNode(''));
+          missionMealsTableData1.className = "mdl-data-table__cell--non-numeric";
+          componentHandler.upgradeElement(missionMealsTableData1);
+          missionMealsTableRow.appendChild(missionMealsTableData1);
+
+          var missionMealsTableData2 = document.createElement('td');
+          missionMealsTableData2.appendChild(document.createTextNode(''));
+          missionMealsTableData2.className = "mdl-data-table__cell--non-numeric";
+          componentHandler.upgradeElement(missionMealsTableData2);
+          missionMealsTableRow.appendChild(missionMealsTableData2);
+	}
+
+        var missionMealsTableData3 = document.createElement('td');
+        missionMealsTableData3.appendChild(document.createTextNode(menu.qty));
+        missionMealsTableData3.className = "mdl-data-table__cell--non-numeric";
+        componentHandler.upgradeElement(missionMealsTableData3);
+        missionMealsTableRow.appendChild(missionMealsTableData3);
+
+        var missionMealsTableData4 = document.createElement('td');
+        missionMealsTableData4.appendChild(document.createTextNode(menu.description));
+        missionMealsTableData4.className = "mdl-data-table__cell--non-numeric";
+        componentHandler.upgradeElement(missionMealsTableData4);
+        missionMealsTableRow.appendChild(missionMealsTableData4);
       });
     });
 
