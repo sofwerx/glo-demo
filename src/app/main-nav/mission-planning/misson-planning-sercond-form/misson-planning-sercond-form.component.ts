@@ -68,12 +68,13 @@ export class MissonPlanningSercondFormComponent implements OnInit , OnChanges {
 
   createForm() {
     const missionFirstFormValues = this.data.firstFormValues;
+
     this.missionSecondForm = this.fb.group({
       missionName: missionFirstFormValues.missionName,
       startDate: missionFirstFormValues.startDate,
       endDate: missionFirstFormValues.endDate,
       location: missionFirstFormValues.location || 'didn\'t set',
-      duration: '0',
+      duration: this.moment(missionFirstFormValues.endDate).diff(missionFirstFormValues.startDate, 'day'),
       daysToDeployment: '0',
 
       pax: undefined,

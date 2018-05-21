@@ -38,7 +38,7 @@ const MGRS_PRECISION = 3;
         <mat-datepicker #startPicker></mat-datepicker>
       </mat-form-field>
       <mat-form-field>
-        <input matInput [min]="minDate" [matDatepicker]="endPicker" placeholder="End date">
+        <input matInput [min]="minDate" [matDatepicker]="endPicker" placeholder="End date" [formControlName]="'endDate'">
         <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
         <mat-datepicker #endPicker></mat-datepicker>
       </mat-form-field>
@@ -87,7 +87,7 @@ export class MissionPlanningFirstFormComponent implements OnInit, OnDestroy, Aft
     this.missionForm = this.fb.group({
       missionName: '',
       startDate: moment().toISOString(),
-      endDate: undefined,
+      endDate: moment().add(1, 'month').toISOString(),
       location: undefined,
       phase: this.fb.array([]),
     });
@@ -138,6 +138,6 @@ export class MissionPlanningFirstFormComponent implements OnInit, OnDestroy, Aft
   }
 
   ngAfterViewInit(): void {
-    setTimeout(()=>this.missionName.nativeElement.focus(),0);
+    setTimeout(() => this.missionName.nativeElement.focus(), 0);
   }
 }
