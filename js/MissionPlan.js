@@ -6,7 +6,7 @@ function MissionPlan(name) {
   this.cartographicPosition = null;
   this.mgrs = null;
   this.icon = null;
-  this.startDate = new Date();
+  this.startDate = new Date(Date.now() + MSEC_TO_DAYS);
   this.duration = 0;
   this.deploymentDays = 0;
   this.pax = 0;
@@ -35,7 +35,7 @@ function MissionPlan(name) {
   });
 
   this.name = name;
-  this.endDate = new Date();
+  this.endDate = new Date(Date.now() + (MSEC_TO_DAYS * 30));
 
   this.populateMeals = function() {
     /*

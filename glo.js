@@ -1,3 +1,7 @@
+
+const MGRS_PRECISION = 3;
+const MSEC_TO_DAYS = (1000*60*60*24);
+
 console.log("Script starting Cesium");
 
 Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJjMWI3Y2EzZS0wYWQwLTQzNDEtYWU3ZC0xMDFjODRjODdjMDMiLCJpZCI6MjY5LCJpYXQiOjE1MjI3ODY5NDV9.SaOpK9rwYkTsLFSzl-zBKCj-JOxU7Wo0vxIDnC7CSdo';
@@ -47,9 +51,6 @@ handler.setInputAction(function(click) {
 
 console.log("Cesium Initialized");
 
-const MGRS_PRECISION = 3;
-const MSEC_TO_DAYS = (1000*60*60*24);
-
 //var menuDrawer = document.querySelector('.mdl-navigation__link-drawer');
 var missionPlanningDialog = document.querySelector('#mission-planning-dialog');
 var missionPlanningLink = document.querySelector('#mission-planning-link');
@@ -83,6 +84,15 @@ function beginMissionMeals() {
 
     curMissionPlan.populateMeals();
     console.log("curMissionPlan.meals = " + JSON.stringify(curMissionPlan.meals));
+
+    // TODO: remove previous table rows before adding new ones
+
+    // ???
+    // children = missionMealsTbody.childNodes;
+    // len = children.length;
+    // for (var i = 0; i < len; ++i) {
+    //   missionMealsTbody.removeChild(children[i]);
+    // }
 
     meals = JSON.parse(JSON.stringify(curMissionPlan.meals));
     while (meal = meals.shift()) {
@@ -236,6 +246,7 @@ phase1Link.addEventListener('click', planPhaseOne);
 
 mealsCloseBtn = missionMealsDialog.querySelector('#missionMealsBackBtn');
 mealsCloseBtn.addEventListener('click', function() {
+  // TODO: save changes to ration quantities, validate totals
   missionMealsDialog.close();
 });
 
