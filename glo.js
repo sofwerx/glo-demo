@@ -47,6 +47,9 @@ handler.setInputAction(function(click) {
 
 console.log("Cesium Initialized");
 
+const MGRS_PRECISION = 3;
+const MSEC_TO_DAYS = (1000*60*60*24);
+
 //var menuDrawer = document.querySelector('.mdl-navigation__link-drawer');
 var missionPlanningDialog = document.querySelector('#mission-planning-dialog');
 var missionPlanningLink = document.querySelector('#mission-planning-link');

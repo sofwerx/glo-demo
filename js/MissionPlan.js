@@ -1,8 +1,6 @@
 // needs mgrs.js
 
 function MissionPlan(name) {
-  const MGRS_PRECISION = 3;
-  const MSEC_TO_DAYS = (1000*60*60*24);
 
   // Phase I -- these should go in an array of phase objs eventually
   this.cartographicPosition = null;
