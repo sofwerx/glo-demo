@@ -76,7 +76,7 @@ function MissionPlan(name) {
 
       this.meals.push({
         cycle: "M-M-M",
-        duration: mreDays - daysCovered,
+        duration: mreDays,
         menus: [{
           qty: Math.ceil((this.pax * 3 * mreDays) / MRE_PER_CASE),
           description: "MRE (cases)"
@@ -91,7 +91,7 @@ function MissionPlan(name) {
 
       this.meals.push({
         cycle: "U-M-M",
-        duration: ummDays - daysCovered,
+        duration: ummDays,
         menus: [{
           qty: Math.ceil((this.pax * ummDays) / UGR_PER_CASE),
           description: "UGR H&S (cases)"
@@ -110,7 +110,7 @@ function MissionPlan(name) {
 
       this.meals.push({
         cycle: "U-M-U",
-        duration: umuDays - daysCovered,
+        duration: umuDays,
         menus: [{
           qty: Math.ceil((this.pax * umuDays) / UGR_PER_CASE),
           description: "UGR H & S (cases)"

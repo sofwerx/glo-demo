@@ -84,14 +84,13 @@ function beginMissionMeals() {
     curMissionPlan.populateMeals();
     console.log("curMissionPlan.meals = " + JSON.stringify(curMissionPlan.meals));
 
-    curMissionPlan.meals.forEach(function(meal) {
+    meals = JSON.parse(JSON.stringify(curMissionPlan.meals));
+    while (meal = meals.shift()) {
+    // curMissionPlan.meals.forEach(function(meal) {
       var missionMealsTableRow = document.createElement('tr');
       missionMealsTbody.appendChild(missionMealsTableRow);
 
       dayend = daystart + meal.duration - 1;
-      console.log("daystart1 = " + daystart);
-      console.log("meal.duration = " + meal.duration);
-      console.log("dayend1 = " + dayend);
 
       var missionMealsTableData1 = document.createElement('td');
       missionMealsTableData1.appendChild(document.createTextNode( " " + daystart + "-" + dayend));
@@ -100,18 +99,18 @@ function beginMissionMeals() {
       missionMealsTableRow.appendChild(missionMealsTableData1);
 
       daystart = dayend + 1
-      console.log("daystart2 = " + daystart);
 
       var missionMealsTableData2 = document.createElement('td');
       missionMealsTableData2.appendChild(document.createTextNode(meal.cycle));
       missionMealsTableData2.className = "mdl-data-table__cell--non-numeric";
       componentHandler.upgradeElement(missionMealsTableData2);
       missionMealsTableRow.appendChild(missionMealsTableData2);
-      
-      var menus = meal.menus;
-      menus.forEach(function(menu) {
 
-        if(menus.length > 1) {
+      var menus = JSON.parse(JSON.stringify(meal.menus));
+      while (menu = menus.shift()) {
+      // menus.forEach(function(menu) {
+
+        if(meal.menus.length > 1) {
           missionMealsTableRow = document.createElement('tr');
           missionMealsTbody.appendChild(missionMealsTableRow);
 
@@ -126,7 +125,7 @@ function beginMissionMeals() {
           missionMealsTableData2.className = "mdl-data-table__cell--non-numeric";
           componentHandler.upgradeElement(missionMealsTableData2);
           missionMealsTableRow.appendChild(missionMealsTableData2);
-	}
+	      }
 
         var missionMealsTableData3 = document.createElement('td');
         missionMealsTableData3.appendChild(document.createTextNode(menu.qty));
@@ -139,8 +138,8 @@ function beginMissionMeals() {
         missionMealsTableData4.className = "mdl-data-table__cell--non-numeric";
         componentHandler.upgradeElement(missionMealsTableData4);
         missionMealsTableRow.appendChild(missionMealsTableData4);
-      });
-    });
+      }
+    }
 
     missionMealsDialog.showModal();
 }
