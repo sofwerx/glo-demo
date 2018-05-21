@@ -53,11 +53,12 @@ var missionPlanningLink = document.querySelector('#mission-planning-link');
 var missionMealsDialog = document.querySelector('#mission-meals-dialog');
 var missionMealsLink = document.querySelector('#mission-meals-link');
 var missionMealsTbody = document.querySelector('#mission-meals-tbody');
+var totalPAX = document.querySelector('#totalPAX');
 
 var meals = [
   {
     cycle: "F-F-F",
-    duration: 3,
+    duration: 2,
     menus: [
       {
         qty: 20,
@@ -115,12 +116,21 @@ var mEnd = missionPlanningDialog.querySelector('#missionEndDate');
 function beginMissionMeals() {
     console.log("Showing missionMealsDialog");
 
+    var day = 1;
+
+    var daystart = day;
+    var dayend = daystart;
+
     meals.forEach(function(meal) {
       var missionMealsTableRow = document.createElement('tr');
       missionMealsTbody.appendChild(missionMealsTableRow);
 
+      daystart = day
+      dayend = day + meal.duration;
+      day = dayend
+
       var missionMealsTableData1 = document.createElement('td');
-      missionMealsTableData1.appendChild(document.createTextNode("D + " + meal.duration));
+      missionMealsTableData1.appendChild(document.createTextNode("D + " + daystart));
       missionMealsTableData1.className = "mdl-data-table__cell--non-numeric";
       componentHandler.upgradeElement(missionMealsTableData1);
       missionMealsTableRow.appendChild(missionMealsTableData1);
@@ -243,6 +253,13 @@ function planPhaseOne() {
   phase1Dialog.showModal();
   missionPlanningDialog.close();
 };
+
+function changeTotalPAX() {
+  console.log("PAX: " + totalPAX.value);
+  curMissionPlan.pax = totalPAX.value;
+}
+
+totalPAX.addEventListener('change', changeTotalPAX);
 
 phase1Link.addEventListener('click', planPhaseOne);
 
