@@ -1,12 +1,12 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { FormBuilder, FormGroup } from "@angular/forms";
+import { Component, EventEmitter, Inject, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import * as moment from 'moment';
-import { MatSnackBar } from "@angular/material";
+import { MAT_DIALOG_DATA, MatDialogRef, MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'misson-planning-sercond-form',
   template: `
-    <mat-divider></mat-divider>
+    <h2 mat-dialog-title>Mission Planning</h2>
     <form [formGroup]="missionSecondForm"  class="mission-form">
       <div class="center">
         <mat-form-field appearance="outline">
@@ -37,46 +37,42 @@ import { MatSnackBar } from "@angular/material";
           <div class="mat-body-1">{{ missionSecondForm.get('daysToDeployment')?.value }}</div>
         </div>
       </div>
+      <mat-divider></mat-divider>
       <div>
-        <mat-form-field appearance="outline">
+        <mat-form-field >
           <mat-label>PAX (total)</mat-label>
           <input  type="number" matInput placeholder="Enter Pax amount" formControlName="pax">
         </mat-form-field>
       </div>
-      <p class="mat-action-row">
-        <button mat-raised-button color="accent" (click)="onBack.emit()" class="action-btn">Back</button>
-        <button mat-raised-button color="accent" (click)="onSubmit()" class="action-btn">Submit request</button>
-      </p>
     </form>
+    <mat-dialog-actions>
+      <button mat-raised-button color="accent" [mat-dialog-close]="{shouldGoBack: true}">Back</button>
+      <button mat-raised-button color="accent" (click)="onSubmit()">Submit Request</button>
+    </mat-dialog-actions>
   `,
   styleUrls: ['./misson-planning-sercond-form.component.css']
 })
-export class MissonPlanningSercondFormComponent implements OnInit , OnChanges{
-
-  @Input()
-  missionFirstFormValues;
-  @Output()
-  onFormSubmit = new EventEmitter();
-  @Output()
-  onBack = new EventEmitter();
+export class MissonPlanningSercondFormComponent implements OnInit , OnChanges {
 
   missionSecondForm: FormGroup;
   moment = moment;
 
   constructor(private fb: FormBuilder,
-              public snackBar: MatSnackBar) { }
+              public snackBar: MatSnackBar,
+              private self: MatDialogRef<MissonPlanningSercondFormComponent>,
+              @Inject(MAT_DIALOG_DATA) private data: {firstFormValues: any}) { }
 
   ngOnInit() {
     this.createForm();
   }
 
   createForm() {
-    console.log(this.missionFirstFormValues);
+    const missionFirstFormValues = this.data.firstFormValues;
     this.missionSecondForm = this.fb.group({
-      missionName: {value: this.missionFirstFormValues.missionName,disabled: true},
-      startDate: this.missionFirstFormValues.startDate,
-      endDate: this.missionFirstFormValues.endDate,
-      location: this.missionFirstFormValues.location,
+      missionName: missionFirstFormValues.missionName,
+      startDate: missionFirstFormValues.startDate,
+      endDate: missionFirstFormValues.endDate,
+      location: missionFirstFormValues.location || 'didn\'t set',
       duration: '0',
       daysToDeployment: '0',
 
@@ -85,9 +81,9 @@ export class MissonPlanningSercondFormComponent implements OnInit , OnChanges{
 
   }
 
-  onSubmit(){
-    this.snackBar.open('Mission was submitted successfully','ok',{ duration: 2000});
-    this.onFormSubmit.emit();
+  onSubmit() {
+    this.snackBar.open('Mission was submitted successfully', 'ok', { duration: 2000});
+    this.self.close();
   }
 
   ngOnChanges(changes: SimpleChanges): void {

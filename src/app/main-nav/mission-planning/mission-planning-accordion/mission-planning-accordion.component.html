@@ -1,32 +1,32 @@
-<div *ngIf="showAccordion">
-  <mat-accordion class="example-headers-align">
-    <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Mission Planning
-        </mat-panel-title>
-        <mat-panel-description>
-          Enter Mission Details
-        </mat-panel-description>
-      </mat-expansion-panel-header>
-      <mission-planning-first-form
-        (onFormSubmit)="missionPlanningFirstSubmit($event)"
-        (onCancel)="cancelFrom()"
-      ></mission-planning-first-form>
-    </mat-expansion-panel>
-    <mat-expansion-panel [disabled]="missionFirstValues === undefined" [expanded]="step === 1" (opened)="setStep(1)">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Mission Planning
-        </mat-panel-title>
-        <mat-panel-description>
-          Submit
-        </mat-panel-description>
-      </mat-expansion-panel-header>
-      <misson-planning-sercond-form *ngIf="step === 1"
-                                    (onFormSubmit)="missionPlanningSecondSubmit($event)"
-                                    (onBack)="backToFirst()"
-                                    [missionFirstFormValues]="missionFirstValues"></misson-planning-sercond-form>
-    </mat-expansion-panel>
-  </mat-accordion>
-</div>
+<!--<div *ngIf="showAccordion">-->
+  <!--<mat-accordion class="example-headers-align">-->
+    <!--<mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)">-->
+      <!--<mat-expansion-panel-header>-->
+        <!--<mat-panel-title>-->
+          <!--Mission Planning-->
+        <!--</mat-panel-title>-->
+        <!--<mat-panel-description>-->
+          <!--Enter Mission Details-->
+        <!--</mat-panel-description>-->
+      <!--</mat-expansion-panel-header>-->
+      <!--<mission-planning-first-form-->
+        <!--(onFormSubmit)="missionPlanningFirstSubmit($event)"-->
+        <!--(onCancel)="cancelFrom()"-->
+      <!--&gt;</mission-planning-first-form>-->
+    <!--</mat-expansion-panel>-->
+    <!--<mat-expansion-panel [disabled]="missionFirstValues === undefined" [expanded]="step === 1" (opened)="setStep(1)">-->
+      <!--<mat-expansion-panel-header>-->
+        <!--<mat-panel-title>-->
+          <!--Mission Planning-->
+        <!--</mat-panel-title>-->
+        <!--<mat-panel-description>-->
+          <!--Submit-->
+        <!--</mat-panel-description>-->
+      <!--</mat-expansion-panel-header>-->
+      <!--<misson-planning-sercond-form *ngIf="step === 1"-->
+                                    <!--(onFormSubmit)="missionPlanningSecondSubmit($event)"-->
+                                    <!--(onBack)="backToFirst()"-->
+                                    <!--[missionFirstFormValues]="missionFirstValues"></misson-planning-sercond-form>-->
+    <!--</mat-expansion-panel>-->
+  <!--</mat-accordion>-->
+<!--</div>-->

@@ -27,7 +27,7 @@ export class MarkersLocationsService {
 
 
   startMapListenToClicks() {
-    if (this.mapEventManager === undefined ){
+    if (this.mapEventManager === undefined) {
       this.getMapServices();
     }
 
@@ -48,8 +48,11 @@ export class MarkersLocationsService {
   getMarkerLocations$() {
     return this.markersLocations$;
   }
+
   stopListenToClicks() {
-    this.mapClicks$.dispose();
+    if (this.mapClicks$) {
+      this.mapClicks$.dispose();
+    }
   }
 
   getMapServices(): void {

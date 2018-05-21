@@ -1,10 +1,9 @@
 <mat-toolbar color="primary">Global Logistics Overview</mat-toolbar>
 <mat-nav-list>
-  <a mat-list-item (click)="showMissionPlanning = !showMissionPlanning">Mission Planning</a>
+  <a mat-list-item (click)="openMissionPlanning()">Mission Planning</a>
   <a mat-list-item href="#">Ongoing OPS</a>
   <a mat-list-item href="#">Estimation Tool</a>
   <a mat-list-item href="#">Intel Tool</a>
 </mat-nav-list>
 <mat-divider></mat-divider>
 <mat-divider></mat-divider>
-<mission-planning-accordion (onCancel)="showMissionPlanning = false" [show]="showMissionPlanning"></mission-planning-accordion>
