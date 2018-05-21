@@ -8,6 +8,10 @@ html, body, .map-container {
 }
 
 
-.mat-dialog-container{
+.mat-dialog-container {
   background-color: rgba(66, 66, 66,0.9);
+}
+
+.mat-drawer-backdrop {
+  background-color: rgba(0,0,0,0.4) !important;
 }

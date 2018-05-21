@@ -26,7 +26,7 @@ export class MainMapComponent implements OnInit, AfterViewInit {
     const viewer = this.mapManager.getMap().getCesiumViewer();
     viewer.imageryLayers.addImageryProvider(
       new CartoDBImageryProvider({
-        url: 'http://{s}.basemaps.cartocdn.com/spotify_dark/{z}/{x}/{y}.png',
+        url: 'http://{s}.basemaps.cartocdn.com/pitney-bowes-dark/{z}/{x}/{y}.png',
         credit: 'Basemap courtesy of CartoDB',
       }),
     );

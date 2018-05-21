@@ -1,10 +1,10 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
-import { MatDialog } from "@angular/material";
-import { MissionPlanningFirstFormComponent } from "./mission-planning/mission-planning-first-form/mission-planning-first-form.component";
-import { MatDialogRef } from "@angular/material/dialog/typings/dialog-ref";
-import { MissonPlanningSercondFormComponent } from "./mission-planning/misson-planning-sercond-form/misson-planning-sercond-form.component";
+import { MatDialog } from '@angular/material';
+import { MissionPlanningFirstFormComponent } from './mission-planning/mission-planning-first-form/mission-planning-first-form.component';
+import { MatDialogRef } from '@angular/material/dialog/typings/dialog-ref';
+import { MissonPlanningSercondFormComponent } from './mission-planning/misson-planning-sercond-form/misson-planning-sercond-form.component';
 
 @Component({
   selector: 'main-nav',
@@ -26,7 +26,7 @@ export class MainNavComponent {
     if (!this.missionDialogOpen) {
       this.onMenuItemClick.emit();
       this.missionDialogFirstRef = this.dialog.open(MissionPlanningFirstFormComponent, {
-        height: '500px',
+        height: '530px',
         width: '350px',
       });
       this.missionDialogOpen = true;
@@ -35,7 +35,7 @@ export class MainNavComponent {
         this.missionDialogOpen = false;
         if (firstFormValues) {
           this.missionDialogSecRef = this.dialog.open(MissonPlanningSercondFormComponent, {
-            height: '500px',
+            height: '530px',
             width: '350px',
             data: {
               firstFormValues,
