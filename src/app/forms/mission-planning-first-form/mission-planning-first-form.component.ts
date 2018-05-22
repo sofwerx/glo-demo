@@ -11,7 +11,7 @@ import {
 import { FormBuilder, FormGroup } from '@angular/forms';
 import * as moment from 'moment';
 import * as mgrs from 'mgrs';
-import { MarkersLocationsService } from '../../../main-map/marker-layer/markers-locations.service';
+import { MarkersLocationsService } from '../../main-map/marker-layer/markers-locations.service';
 import { MapsManagerService } from 'angular-cesium';
 import { map } from 'rxjs/operators';
 import { MAT_DIALOG_DATA, MatDialogRef, MatSnackBar } from '@angular/material';

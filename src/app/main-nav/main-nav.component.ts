@@ -2,9 +2,9 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { MatDialog } from '@angular/material';
-import { MissionPlanningFirstFormComponent } from './mission-planning/mission-planning-first-form/mission-planning-first-form.component';
+import { MissionPlanningFirstFormComponent } from '../forms/mission-planning-first-form/mission-planning-first-form.component';
 import { MatDialogRef } from '@angular/material/dialog/typings/dialog-ref';
-import { MissonPlanningSercondFormComponent } from './mission-planning/misson-planning-sercond-form/misson-planning-sercond-form.component';
+import { MissonPlanningSercondFormComponent } from '../forms/misson-planning-sercond-form/misson-planning-sercond-form.component';
 import { MarkersLocationsService } from "../main-map/marker-layer/markers-locations.service";
 import { Cartesian3 } from "angular-cesium";
 
