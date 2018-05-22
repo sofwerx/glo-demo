@@ -1,0 +1,22 @@
+.form-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+
+}
+
+
+.input {
+  background-color: transparent;
+  color: white;
+  border: none;
+}
+
+table {
+  width: 100%;
+}

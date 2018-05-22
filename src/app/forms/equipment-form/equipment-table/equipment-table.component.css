@@ -1,0 +1,17 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+
+}
+
+
+.input {
+  background-color: transparent;
+  color: white;
+  border: none;
+}
+
+table {
+  width: 100%;
+}

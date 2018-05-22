@@ -35,3 +35,13 @@
 .action-btn {
   margin: 5px;
 }
+
+.forms-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.form-btn {
+  width: 180px;
+}
