@@ -60,9 +60,11 @@ import { EquipmentFormComponent } from '../equipment-form/equipment-form.compone
         <div class="forms-buttons">
           <button mat-raised-button color="primary" class="form-btn"
                   [disabled]="!missionSecondForm.get('pax').valid"
-                  (click)="openMealsFrom()">Logistics Requirements</button>
+                  (click)="openMealsFrom()">Logistics Requirements
+          </button>
           <button mat-raised-button color="primary" class="form-btn" style="margin-top: 5px"
-                  (click)="openEquipmentFrom()">Equipment</button>
+                  (click)="openEquipmentFrom()">Equipment
+          </button>
         </div>
       </form>
       <div style="flex-grow: 1"></div>
@@ -76,8 +78,8 @@ import { EquipmentFormComponent } from '../equipment-form/equipment-form.compone
 })
 export class MissonPlanningSercondFormComponent implements OnInit, OnChanges {
 
-  missionSecondForm: FormGroup;
   moment = moment;
+  missionSecondForm: FormGroup;
 
   constructor(private fb: FormBuilder,
               public snackBar: MatSnackBar,
@@ -93,7 +95,7 @@ export class MissonPlanningSercondFormComponent implements OnInit, OnChanges {
   openMealsFrom() {
     this.dialog.open(MealsFormComponent, {
       height: '500px',
-      width: '600px',
+      width: '700px',
       position: {top: '50px', left: '450px'},
       data: {
         duration: this.missionSecondForm.get('duration').value,

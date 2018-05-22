@@ -30,14 +30,14 @@ import { EquipmentDataRow, EquipmentFileTypes } from "../equipment.service";
 
         <!-- Position Column -->
         <ng-container matColumnDef="lin">
-          <th mat-header-cell mat-sort-header *matHeaderCellDef>Lin</th>
+          <th mat-header-cell  *matHeaderCellDef mat-sort-header>Lin</th>
           <td mat-cell *matCellDef="let element"> {{element.lin}}</td>
         </ng-container>
 
         <!-- Name Column -->
-        <ng-container matColumnDef="name">
+        <ng-container matColumnDef="name" class="max-name-col">
           <th mat-header-cell mat-sort-header *matHeaderCellDef>Name</th>
-          <td mat-cell *matCellDef="let element"> {{element.name}}</td>
+          <td mat-cell *matCellDef="let element" class="max-name-col"> {{element.name}}</td>
         </ng-container>
 
         <!-- Weight Column -->
@@ -78,7 +78,7 @@ export class EquipmentTableComponent implements OnInit, OnChanges {
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild('paginator') commPaginator: MatPaginator;
-  displayedColumns = ['lin', 'name', 'availableQuantity', 'requiredQuantity'];
+  displayedColumns = ['select', 'lin', 'name', 'availableQuantity', 'requiredQuantity'];
   dataSource: MatTableDataSource<EquipmentDataRow> = new MatTableDataSource<EquipmentDataRow>([]);
   selection = new SelectionModel<EquipmentDataRow>(true, []);
 
