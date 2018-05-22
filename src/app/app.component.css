@@ -16,3 +16,11 @@
   width: 25%;
   box-shadow: 3px 0 6px rgba(0,0,0,.24);
 }
+
+.logo {
+  position: absolute;
+  z-index: 100;
+  top: 50px;
+  right: 30px;
+  filter: brightness(10) grayscale(100%);  
+}
