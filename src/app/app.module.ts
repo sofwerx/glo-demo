@@ -38,6 +38,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { EquipmentTableComponent } from './forms/equipment-form/equipment-table/equipment-table.component';
 
 import { StateService } from './common/state/state.service';
+import { OngoingMissionsComponent } from './forms/ongoing-missions/ongoing-missions.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { StateService } from './common/state/state.service';
     MealsFormComponent,
     EquipmentFormComponent,
     EquipmentTableComponent,
+    OngoingMissionsComponent,
   ],
   imports: [
     BrowserModule,

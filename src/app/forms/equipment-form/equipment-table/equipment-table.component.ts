@@ -1,7 +1,7 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
-import { SelectionModel } from "@angular/cdk/collections";
-import { MatPaginator, MatSort, MatTableDataSource } from "@angular/material";
-import { EquipmentDataRow, EquipmentFileTypes } from "../equipment.service";
+import { SelectionModel } from '@angular/cdk/collections';
+import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { EquipmentDataRow, EquipmentFileTypes } from '../equipment.service';
 
 @Component({
   selector: 'equipment-table',
