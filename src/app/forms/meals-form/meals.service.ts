@@ -29,11 +29,6 @@ export class MealsService {
   constructor() {
   }
 
-  x() {
-    return 1;
-  }
-
-
   populateMeals(duration: number, deploymentDays: number, pax: number) {
     const meals = [];
     /*
