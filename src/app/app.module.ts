@@ -14,16 +14,17 @@ import {
   MatInputModule,
   MatDatepickerModule,
   MatFormFieldModule, MatTooltipModule, MatSnackBarModule, MatExpansionModule,
-  MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS
+  MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS, MatTableModule, MatPaginatorModule
 } from '@angular/material';
 import { AngularCesiumModule } from 'angular-cesium';
 import { MainMapComponent } from './main-map/main-map.component';
-import { MissionPlanningFirstFormComponent } from './main-nav/mission-planning/mission-planning-first-form/mission-planning-first-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { MarkerLayerComponent } from './main-map/marker-layer/marker-layer.component';
-import { MissonPlanningSercondFormComponent } from './main-nav/mission-planning/misson-planning-sercond-form/misson-planning-sercond-form.component';
 import { MissionPlanningAccordionComponent } from './main-nav/mission-planning/mission-planning-accordion/mission-planning-accordion.component';
+import { MealsFormComponent } from './forms/meals-form/meals-form.component';
+import { MissionPlanningFirstFormComponent } from './forms/mission-planning-first-form/mission-planning-first-form.component';
+import { MissonPlanningSercondFormComponent } from './forms/misson-planning-sercond-form/misson-planning-sercond-form.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { MissionPlanningAccordionComponent } from './main-nav/mission-planning/m
     MissionPlanningFirstFormComponent,
     MarkerLayerComponent,
     MissonPlanningSercondFormComponent,
-    MissionPlanningAccordionComponent
+    MissionPlanningAccordionComponent,
+    MealsFormComponent
   ],
   imports: [
     BrowserModule,
@@ -55,6 +57,8 @@ import { MissionPlanningAccordionComponent } from './main-nav/mission-planning/m
     MatExpansionModule,
     MatDialogModule,
     AngularCesiumModule.forRoot(),
+    MatTableModule,
+    MatPaginatorModule,
   ],
   providers: [{
     provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {
@@ -64,7 +68,7 @@ import { MissionPlanningAccordionComponent } from './main-nav/mission-planning/m
       position: {top: '50px', left: '50px'}
     }
   }],
-  entryComponents: [MissionPlanningFirstFormComponent, MissonPlanningSercondFormComponent],
+  entryComponents: [MissionPlanningFirstFormComponent, MissonPlanningSercondFormComponent, MealsFormComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {

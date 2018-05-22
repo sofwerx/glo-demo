@@ -4,6 +4,12 @@
   flex-direction: column;
 }
 
+.second-form-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
 .info-container {
   display: flex;
   flex-direction: column;
