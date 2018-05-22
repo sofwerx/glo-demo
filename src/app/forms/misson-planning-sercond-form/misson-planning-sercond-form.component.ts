@@ -1,8 +1,19 @@
-import { Component, EventEmitter, Inject, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Inject,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+  ViewChild
+} from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import * as moment from 'moment';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogRef, MatSnackBar } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef, MatSnackBar, MatSort } from '@angular/material';
 import { MealsFormComponent } from '../meals-form/meals-form.component';
+import { EquipmentFormComponent } from '../equipment-form/equipment-form.component';
 
 @Component({
   selector: 'misson-planning-sercond-form',
@@ -46,10 +57,12 @@ import { MealsFormComponent } from '../meals-form/meals-form.component';
             <input type="number" required matInput placeholder="Enter Pax amount" formControlName="pax">
           </mat-form-field>
         </div>
-        <div>
-          <button mat-raised-button color="primary"
+        <div class="forms-buttons">
+          <button mat-raised-button color="primary" class="form-btn"
                   [disabled]="!missionSecondForm.get('pax').valid"
                   (click)="openMealsFrom()">Logistics Requirements</button>
+          <button mat-raised-button color="primary" class="form-btn" style="margin-top: 5px"
+                  (click)="openEquipmentFrom()">Equipment</button>
         </div>
       </form>
       <div style="flex-grow: 1"></div>
@@ -87,6 +100,14 @@ export class MissonPlanningSercondFormComponent implements OnInit, OnChanges {
         deploymentDays: this.missionSecondForm.get('daysToDeployment').value,
         pax: this.missionSecondForm.get('pax').value,
       }
+    });
+  }
+
+  openEquipmentFrom() {
+    this.dialog.open(EquipmentFormComponent, {
+      height: '600px',
+      width: '800px',
+      position: {top: '50px', left: '450px'},
     });
   }
 

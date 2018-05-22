@@ -14,7 +14,7 @@ import {
   MatInputModule,
   MatDatepickerModule,
   MatFormFieldModule, MatTooltipModule, MatSnackBarModule, MatExpansionModule,
-  MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS, MatTableModule, MatPaginatorModule
+  MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS, MatTableModule, MatPaginatorModule, MatCheckboxModule
 } from '@angular/material';
 import { AngularCesiumModule } from 'angular-cesium';
 import { MainMapComponent } from './main-map/main-map.component';
@@ -25,6 +25,9 @@ import { MissionPlanningAccordionComponent } from './main-nav/mission-planning/m
 import { MealsFormComponent } from './forms/meals-form/meals-form.component';
 import { MissionPlanningFirstFormComponent } from './forms/mission-planning-first-form/mission-planning-first-form.component';
 import { MissonPlanningSercondFormComponent } from './forms/misson-planning-sercond-form/misson-planning-sercond-form.component';
+import { EquipmentFormComponent } from './forms/equipment-form/equipment-form.component';
+import { HttpClientModule } from '@angular/common/http';
+import { EquipmentTableComponent } from './forms/equipment-form/equipment-table/equipment-table.component';
 
 
 @NgModule({
@@ -36,7 +39,9 @@ import { MissonPlanningSercondFormComponent } from './forms/misson-planning-serc
     MarkerLayerComponent,
     MissonPlanningSercondFormComponent,
     MissionPlanningAccordionComponent,
-    MealsFormComponent
+    MealsFormComponent,
+    EquipmentFormComponent,
+    EquipmentTableComponent
   ],
   imports: [
     BrowserModule,
@@ -59,6 +64,8 @@ import { MissonPlanningSercondFormComponent } from './forms/misson-planning-serc
     AngularCesiumModule.forRoot(),
     MatTableModule,
     MatPaginatorModule,
+    MatCheckboxModule,
+    HttpClientModule,
   ],
   providers: [{
     provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {
@@ -68,7 +75,7 @@ import { MissonPlanningSercondFormComponent } from './forms/misson-planning-serc
       position: {top: '50px', left: '50px'}
     }
   }],
-  entryComponents: [MissionPlanningFirstFormComponent, MissonPlanningSercondFormComponent, MealsFormComponent],
+  entryComponents: [MissionPlanningFirstFormComponent, MissonPlanningSercondFormComponent, MealsFormComponent, EquipmentFormComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {
