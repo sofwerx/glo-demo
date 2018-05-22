@@ -2,7 +2,7 @@ import { Component, EventEmitter, Inject, Input, OnChanges, OnInit, Output, Simp
 import { FormBuilder, FormGroup } from '@angular/forms';
 import * as moment from 'moment';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef, MatSnackBar } from '@angular/material';
-import { MealsFormComponent } from "../meals-form/meals-form.component";
+import { MealsFormComponent } from '../meals-form/meals-form.component';
 
 @Component({
   selector: 'misson-planning-sercond-form',
@@ -47,7 +47,9 @@ import { MealsFormComponent } from "../meals-form/meals-form.component";
           </mat-form-field>
         </div>
         <div>
-          <button mat-raised-button color="primary" (click)="openMealsFrom()">Logistics Requirements</button>
+          <button mat-raised-button color="primary"
+                  [disabled]="!missionSecondForm.get('pax').valid"
+                  (click)="openMealsFrom()">Logistics Requirements</button>
         </div>
       </form>
       <div style="flex-grow: 1"></div>
