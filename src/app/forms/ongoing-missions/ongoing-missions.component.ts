@@ -1,6 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
-import { StateService } from "../../common/state/state.service";
-import { Mission } from "../../common/state/types";
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { StateService } from '../../common/state/state.service';
+import { Mission } from '../../common/state/types';
 
 @Component({
   selector: 'ongoing-missions',
@@ -33,14 +33,11 @@ import { Mission } from "../../common/state/types";
   `,
   styleUrls: ['./ongoing-missions.component.css']
 })
-export class OngoingMissionsComponent implements OnInit {
+export class OngoingMissionsComponent implements OnInit, OnChanges {
 
-  missions: Mission[] =[];
+  missions: Mission[] = [];
 
   constructor(private state: StateService) {
-  }
-
-  ngOnInit() {
   }
 
   @Input()
@@ -52,38 +49,10 @@ export class OngoingMissionsComponent implements OnInit {
   showAccordion = true;
   step = null;
 
-  prevStep() {
-
-  }
-
-  nextStep() {
-
-  }
-
   setStep(index: number) {
     this.step = index;
   }
 
-  cancelFrom() {
-    this.step = null;
-    setTimeout(() => this.onCancel.emit(), 150);
-  }
-
-  backToFirst() {
-    this.step = 0;
-  }
-
-  missionPlanningFirstSubmit(values) {
-    this.missionFirstValues = values;
-    this.step = 1;
-  }
-
-  missionPlanningSecondSubmit(values) {
-    this.cancelFrom();
-  }
-
-  constructor() {
-  }
 
   ngOnInit() {
     this.state.missions$.subscribe(missions => {
