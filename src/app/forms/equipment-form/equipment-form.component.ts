@@ -9,9 +9,9 @@ import { SelectionModel } from '@angular/cdk/collections';
   template: `
     <div class="form-container">
       <h2 mat-dialog-title>Equipment</h2>
-      <equipment-table [dataTable]="commData" [searchText]="'Search Communication'"></equipment-table>
-      <equipment-table [dataTable]="moveData" [searchText]="'Search Transport'"></equipment-table>
-      <equipment-table [dataTable]="shootData" [searchText]="'Search Shooting equipment'"></equipment-table>
+      <equipment-table [dataTable]="shootData" [searchText]="'Search Shoot'"></equipment-table>
+      <equipment-table [dataTable]="moveData" [searchText]="'Search Move'"></equipment-table>
+      <equipment-table [dataTable]="commData" [searchText]="'Search Communicate'"></equipment-table>
       <div style="flex-grow: 1"></div>
       <mat-dialog-actions style="display: block">
         <button mat-raised-button color="accent" [mat-dialog-close]>Save</button>
