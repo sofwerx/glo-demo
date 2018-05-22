@@ -5,26 +5,23 @@ import {
   CoordinateConverter,
   MapEventsManagerService,
   MapsManagerService,
-  PickOptions
-} from "angular-cesium";
-import { EventResult } from "angular-cesium/src/angular-cesium/services/map-events-mananger/map-events-manager";
-import { DisposableObservable } from "angular-cesium/src/angular-cesium/services/map-events-mananger/disposable-observable";
-import { Subject } from "rxjs/Subject";
+  PickOptions,
+} from 'angular-cesium';
+import { EventResult } from 'angular-cesium/src/angular-cesium/services/map-events-mananger/map-events-manager';
+import { DisposableObservable } from 'angular-cesium/src/angular-cesium/services/map-events-mananger/disposable-observable';
+import { Subject } from 'rxjs/Subject';
+import { Mission } from '../../common/state/types';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class MarkersLocationsService {
-
   private mapClicks$: DisposableObservable<EventResult>;
   private mapEventManager: MapEventsManagerService;
-  private markersLocations$: Subject<Cartesian3> = new Subject<Cartesian3>();
+  private markersLocations$: Subject<Mission> = new Subject<Mission>();
   private geoConverter: CoordinateConverter;
 
-  constructor(private mapsManager: MapsManagerService) {
-
-  }
-
+  constructor(private mapsManager: MapsManagerService) {}
 
   startMapListenToClicks() {
     if (this.mapEventManager === undefined) {
@@ -39,13 +36,12 @@ export class MarkersLocationsService {
     this.mapClicks$.subscribe(eventResult => {
       const nextPos = this.geoConverter.screenToCartesian3(eventResult.movement.endPosition, false);
       if (nextPos) {
-        this.markersLocations$.next(nextPos);
+        this.markersLocations$.next({ location: nextPos });
       }
     });
 
     return this.getMarkerLocations$();
   }
-
 
   getMarkerLocations$() {
     return this.markersLocations$;

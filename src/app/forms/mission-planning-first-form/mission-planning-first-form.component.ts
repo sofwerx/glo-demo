@@ -15,6 +15,7 @@ import { MarkersLocationsService } from '../../main-map/marker-layer/markers-loc
 import { MapsManagerService } from 'angular-cesium';
 import { map } from 'rxjs/operators';
 import { MAT_DIALOG_DATA, MatDialogRef, MatSnackBar } from '@angular/material';
+import { Mission } from '../../common/state/types';
 
 declare var Cesium;
 const MGRS_PRECISION = 3;
@@ -88,8 +89,8 @@ export class MissionPlanningFirstFormComponent implements OnInit, OnDestroy, Aft
     this.listenToLocations();
   }
 
-  close(){
-    this.ngZone.run(()=>{
+  close() {
+    this.ngZone.run(() => {
       this.self.close();
 
     });
@@ -107,7 +108,7 @@ export class MissionPlanningFirstFormComponent implements OnInit, OnDestroy, Aft
   }
 
   onSubmit() {
-    this.ngZone.run(()=>{
+    this.ngZone.run(() => {
       const missionModel = this.missionForm.value;
       this.self.close(missionModel);
 
@@ -137,7 +138,7 @@ export class MissionPlanningFirstFormComponent implements OnInit, OnDestroy, Aft
 
   private listenToLocations() {
     this.markersLocationsService.getMarkerLocations$()
-      .pipe(map(cartesian3 => this.convertToMgrs(cartesian3)))
+      .pipe(map((mission: Mission) => this.convertToMgrs(mission.location)))
       .subscribe(mgrs => {
         this.missionForm.patchValue({
           location: mgrs

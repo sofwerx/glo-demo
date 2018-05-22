@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
 import { AcNotification, ActionType, Cartesian3 } from 'angular-cesium';
 import { MarkersLocationsService } from './markers-locations.service';
-import { map } from 'rxjs/operators';
+import { StateService } from '../../common/state/state.service';
+import { Mission } from '../../common/state/types';
 
 const SOFWERX_ORIGIN = Cesium.Cartesian3.fromDegrees(-82.4374762, 27.9561611);
 
@@ -11,27 +13,47 @@ const SOFWERX_ORIGIN = Cesium.Cartesian3.fromDegrees(-82.4374762, 27.9561611);
   templateUrl: './marker-layer.component.html',
 })
 export class MarkerLayerComponent implements OnInit {
-  private markers$: Observable<AcNotification>;
+  private markers$: Subject<AcNotification> = new Subject();
   show = true;
-  routeMaterial = new Cesium.PolylineGlowMaterialProperty({color: Cesium.Color.LIGHTBLUE, glowPower: 0.1});
+  routeMaterial = new Cesium.PolylineGlowMaterialProperty({ color: Cesium.Color.LIGHTBLUE, glowPower: 0.1 });
 
-  constructor(private markerLocationsService: MarkersLocationsService) {
-    this.markers$ = markerLocationsService.getMarkerLocations$().pipe(
-      map(cartesian3 => ({
-        actionType: ActionType.ADD_UPDATE,
-        id: '1',
-        entity: {
-          position: cartesian3,
-          image: '/assets/marker.png',
-          text: 'Phase 1',
-        },
-      })),
+  constructor(private markerLocationsService: MarkersLocationsService, private state: StateService) {
+    Observable.merge(state.missions$, markerLocationsService.getMarkerLocations$()).subscribe(
+      (missions: Mission | Mission[]) => {
+        if (Array.isArray(missions)) {
+          this.markers$.next({ actionType: ActionType.DELETE, id: 'current' });
+          missions.forEach(mission => {
+            this.markers$.next({
+              actionType: ActionType.ADD_UPDATE,
+              id: mission.id || 'current',
+              entity: {
+                position: mission.location,
+                image: '/assets/marker.png',
+                text: mission.missionName || 'Phase 1',
+              },
+            });
+          });
+        } else {
+          this.markers$.next({
+            actionType: ActionType.ADD_UPDATE,
+            id: 'current',
+            entity: {
+              position: missions.location,
+              image: '/assets/marker.png',
+              text: missions.missionName || 'Phase 1',
+            },
+          });
+        }
+      },
     );
   }
 
   ngOnInit() {}
 
   getRoute(target: Cartesian3): Cartesian3[] {
+    if (!target) {
+      return [];
+    }
     const edeges = [SOFWERX_ORIGIN, target];
     const midPoints = [];
     const maxHeight = 500000;

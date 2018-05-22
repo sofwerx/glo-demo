@@ -5,8 +5,9 @@ import { MatDialog } from '@angular/material';
 import { MissionPlanningFirstFormComponent } from '../forms/mission-planning-first-form/mission-planning-first-form.component';
 import { MatDialogRef } from '@angular/material/dialog/typings/dialog-ref';
 import { MissonPlanningSercondFormComponent } from '../forms/misson-planning-sercond-form/misson-planning-sercond-form.component';
-import { MarkersLocationsService } from "../main-map/marker-layer/markers-locations.service";
-import { Cartesian3 } from "angular-cesium";
+import { MarkersLocationsService } from '../main-map/marker-layer/markers-locations.service';
+import { Cartesian3 } from 'angular-cesium';
+import { Mission } from '../common/state/types';
 
 @Component({
   selector: 'main-nav',
@@ -68,8 +69,8 @@ export class MainNavComponent implements OnInit {
   ngOnInit(): void {
     setTimeout(() => {
       this.markerService.startMapListenToClicks();
-      this.markerService.getMarkerLocations$().subscribe(cartesian3 => {
-        this.openMissionPlanning(cartesian3);
+      this.markerService.getMarkerLocations$().subscribe((mission: Mission) => {
+        this.openMissionPlanning(mission.location);
       });
     }, 0);
   }

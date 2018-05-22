@@ -7,13 +7,17 @@ import {
   OnInit,
   Output,
   SimpleChanges,
-  ViewChild
+  ViewChild,
 } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import * as moment from 'moment';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef, MatSnackBar, MatSort } from '@angular/material';
-import { MealsFormComponent } from '../meals-form/meals-form.component';
+import * as mgrs from 'mgrs';
+
 import { EquipmentFormComponent } from '../equipment-form/equipment-form.component';
+import { MealsFormComponent } from '../meals-form/meals-form.component';
+import { StateService } from '../../common/state/state.service';
+import { Cartesian3 } from 'angular-cesium';
 
 @Component({
   selector: 'misson-planning-sercond-form',
@@ -74,19 +78,20 @@ import { EquipmentFormComponent } from '../equipment-form/equipment-form.compone
       </mat-dialog-actions>
     </div>
   `,
-  styleUrls: ['./misson-planning-sercond-form.component.css']
+  styleUrls: ['./misson-planning-sercond-form.component.css'],
 })
 export class MissonPlanningSercondFormComponent implements OnInit, OnChanges {
-
-  moment = moment;
   missionSecondForm: FormGroup;
+  moment = moment;
 
-  constructor(private fb: FormBuilder,
-              public snackBar: MatSnackBar,
-              private dialog: MatDialog,
-              private self: MatDialogRef<MissonPlanningSercondFormComponent>,
-              @Inject(MAT_DIALOG_DATA) private data: { firstFormValues: any }) {
-  }
+  constructor(
+    private fb: FormBuilder,
+    public snackBar: MatSnackBar,
+    private dialog: MatDialog,
+    private self: MatDialogRef<MissonPlanningSercondFormComponent>,
+    private state: StateService,
+    @Inject(MAT_DIALOG_DATA) private data: { firstFormValues: any },
+  ) {}
 
   ngOnInit() {
     this.createForm();
@@ -96,12 +101,12 @@ export class MissonPlanningSercondFormComponent implements OnInit, OnChanges {
     this.dialog.open(MealsFormComponent, {
       height: '500px',
       width: '700px',
-      position: {top: '50px', left: '450px'},
+      position: { top: '50px', left: '450px' },
       data: {
         duration: this.missionSecondForm.get('duration').value,
         deploymentDays: this.missionSecondForm.get('daysToDeployment').value,
         pax: this.missionSecondForm.get('pax').value,
-      }
+      },
     });
   }
 
@@ -109,7 +114,7 @@ export class MissonPlanningSercondFormComponent implements OnInit, OnChanges {
     this.dialog.open(EquipmentFormComponent, {
       height: '600px',
       width: '800px',
-      position: {top: '50px', left: '450px'},
+      position: { top: '50px', left: '450px' },
     });
   }
 
@@ -124,16 +129,21 @@ export class MissonPlanningSercondFormComponent implements OnInit, OnChanges {
       daysToDeployment: moment(missionFirstFormValues.startDate).diff(moment(), 'days') + 1,
       pax: undefined,
     });
+  }
 
+  mgrsToCartesian(mgrsLocation: string): Cartesian3 {
+    const cartographicLocation = mgrs.toPoint(mgrsLocation.replace(/\s+/g, ''));
+    return Cesium.Cartesian3.fromDegrees(...cartographicLocation);
   }
 
   onSubmit() {
-    this.snackBar.open('Mission was submitted successfully', 'ok', {duration: 2000});
+    this.snackBar.open('Mission was submitted successfully', 'ok', { duration: 2000 });
+    const mission = this.missionSecondForm.value;
+    this.state.addMission({ ...mission, location: this.mgrsToCartesian(mission.location) });
     this.self.close();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.createForm();
   }
-
 }
