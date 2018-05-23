@@ -6,6 +6,7 @@ export interface Mission {
   startDate?: Date;
   endDate?: Date;
   location: Cartesian3;
+  fromLocation: Cartesian3;
   duration?: number;
   daysToDeployment?: number;
   pax?: number;

@@ -11,6 +11,7 @@ import { EventResult } from 'angular-cesium/src/angular-cesium/services/map-even
 import { DisposableObservable } from 'angular-cesium/src/angular-cesium/services/map-events-mananger/disposable-observable';
 import { Subject } from 'rxjs/Subject';
 import { Mission } from '../../common/state/types';
+import {lastMarkerLoc} from '../../common/state/state.service';
 
 @Injectable({
   providedIn: 'root',
@@ -36,7 +37,7 @@ export class MarkersLocationsService {
     this.mapClicks$.subscribe(eventResult => {
       const nextPos = this.geoConverter.screenToCartesian3(eventResult.movement.endPosition, false);
       if (nextPos) {
-        this.markersLocations$.next({ location: nextPos });
+        this.markersLocations$.next({ fromLocation: lastMarkerLoc, location: nextPos });
       }
     });
 

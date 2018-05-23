@@ -14,7 +14,7 @@ import { Mission } from '../../common/state/types';
           <mat-expansion-panel *ngFor="let mission of missions ; index as i" [expanded]="step === i" (opened)="setStep(i)">
             <mat-expansion-panel-header>
               <mat-panel-title>
-                Mission No.{{i}}
+                Mission No. {{i+1}}
               </mat-panel-title>
               <mat-panel-description>
                 {{mission.missionName}}

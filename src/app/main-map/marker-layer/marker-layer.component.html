@@ -1,7 +1,7 @@
 <ac-layer acFor="let marker of markers$" [show]="show" [context]="this">
   <ac-polyline-desc props="{
     width : 25,
-    positions: getRoute(marker.position),
+    positions: getRoute(marker.fromPosition,marker.position),
     material: routeMaterial
   }">
   </ac-polyline-desc>

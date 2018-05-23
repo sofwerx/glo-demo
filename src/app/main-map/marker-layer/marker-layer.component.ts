@@ -5,8 +5,9 @@ import { AcNotification, ActionType, Cartesian3 } from 'angular-cesium';
 import { MarkersLocationsService } from './markers-locations.service';
 import { StateService } from '../../common/state/state.service';
 import { Mission } from '../../common/state/types';
+import { lastMarkerLoc, prevMission} from '../../common/state/state.service';
 
-const SOFWERX_ORIGIN = Cesium.Cartesian3.fromDegrees(-82.4374762, 27.9561611);
+// const SOFWERX_ORIGIN = Cesium.Cartesian3.fromDegrees(-82.4374762, 27.9561611);
 
 @Component({
   selector: 'marker-layer',
@@ -28,6 +29,7 @@ export class MarkerLayerComponent implements OnInit {
               id: mission.id || 'current',
               entity: {
                 position: mission.location,
+                fromPosition: mission.fromLocation,
                 image: '/assets/marker.png',
                 text: mission.missionName || 'Phase 1',
               },
@@ -39,6 +41,7 @@ export class MarkerLayerComponent implements OnInit {
             id: 'current',
             entity: {
               position: missions.location,
+              fromPosition: lastMarkerLoc,
               image: '/assets/marker.png',
               text: missions.missionName || 'Phase 1',
             },
@@ -50,11 +53,11 @@ export class MarkerLayerComponent implements OnInit {
 
   ngOnInit() {}
 
-  getRoute(target: Cartesian3): Cartesian3[] {
+  getRoute(source: Cartesian3, target: Cartesian3): Cartesian3[] {
     if (!target) {
       return [];
     }
-    const edeges = [SOFWERX_ORIGIN, target];
+    const edeges = [source, target];
     const midPoints = [];
     const maxHeight = 500000;
     const heights = [0.2, 0.4, 0.6, 0.8, 0.9, 1, 0.9, 0.8, 0.6, 0.4, 0.2];
@@ -67,6 +70,6 @@ export class MarkerLayerComponent implements OnInit {
       const point = Cesium.Cartographic.toCartesian(cartographic);
       midPoints.push(point);
     }
-    return [SOFWERX_ORIGIN, ...midPoints, target];
+    return [source, ...midPoints, target];
   }
 }
