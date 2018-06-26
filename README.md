@@ -2,4 +2,6 @@
 
 Global Logistics Operations
 
-This is a little static proof-of-concept mockup of a GIS centric logistics web application.
+Proof-of-concept mockup of a GIS centric logistics web application.
+
+Goal: facilitate logistics requirements across all classes of supply and transportation for operators to send logistical signals to appropriate entities through a simplified user interface.
