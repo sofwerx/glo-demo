@@ -1,6 +1,7 @@
-# glo
+# glo #
+## Global Logistics Operations ##
 
-Global Logistics Operations
+[![Waffle.io - Columns and their card count](https://badge.waffle.io/sofwerx/glo.svg?columns=all)](https://waffle.io/sofwerx/glo)
 
 Proof-of-concept mockup of a GIS centric logistics web application.
 
