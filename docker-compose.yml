@@ -1,11 +1,11 @@
-version: '2.0'
+version: '2.1'
 
 services:
 
-  glo:
-    container_name: glo
-    hostname: glo
+  glo-demo:
+    container_name: glo-demo
+    hostname: glo-demo
     build: .
-    image: glo
+    image: glo-demo
     ports:
      - 4201:4200
